@@ -1,4 +1,5 @@
 @import url('../blocks/page/page.css');
+@import url('../blocks/page/_form_is-open/page_form_is-open.css');
 @import url('../blocks/page-content/page-content.css');
 @import url('../blocks/header/header.css');
 @import url('../blocks/profiles/profiles.css');
@@ -6,3 +7,4 @@
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/edit-form/edit-form.css');
+@import url('../blocks/edit-form/_visible/edit-form_visible.css');
