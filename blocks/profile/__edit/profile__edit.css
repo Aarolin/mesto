@@ -1,11 +1,10 @@
 .profile__edit {
-    max-width: 24px;
-    min-height: 24px;
-    background-image: url('../../../images/profile-edit.jpg');
+    width: 24px;
+    height: 24px;
+    background-image: url('../../../images/profile-edit.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
     background-color: black;
-    align-self: flex-start;
-    margin-top: 37px;
+    margin-top: 19px;
+    margin-left: 17px;
 }

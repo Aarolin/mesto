@@ -1,0 +1,19 @@
+@import url('./_visible/edit-form_visible.css');
+@import url('./__container/edit-form__container.css');
+@import url('./__header/edit-form__header.css');
+@import url('./__field-text/edit-form__field-text.css');
+@import url('./__button-close/edit-form__button-close.css');
+@import url('./__button-save/edit-form__button-save.css');
+
+.edit-form {
+    max-width: 430px;
+    position: fixed;
+    background-color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    padding: 34px 36px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}

@@ -1,0 +1,6 @@
+.elements__label {
+    display: flex;
+    width: 246px;
+    margin: 25px 15px 31px 21px;
+    justify-content: space-between;
+}
