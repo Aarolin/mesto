@@ -1,4 +1,4 @@
-.profile__status {
+.profile__about-self {
     width: 100%;
     font-family: Inter, Arial, sans-serif;
     font-style: normal;
@@ -7,4 +7,7 @@
     line-height: 22px;
     color: #FFFFFF;
     margin: 16px 0 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
