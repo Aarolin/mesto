@@ -4,4 +4,9 @@
     width: 22px;
     height: 18px;
     align-self: center;
+    transition: opacity 0.2s linear;
+}
+
+.elements__like:hover {
+    opacity: 0.5;
 }

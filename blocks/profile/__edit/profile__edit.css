@@ -5,10 +5,19 @@
     background-image: url('../../../images/profile-edit.svg');
     background-repeat: no-repeat;
     background-position: center;
-    background-color: black;
+    background-color: transparent;
     margin-top: 19px;
     margin-left: 17px;
+    transition: opacity 0.2s linear;
 }
 .profile__edit:hover {
-    border: 1px solid rgba(255, 255, 255, 0.6);
+    opacity: 0.6;
+}
+
+@media screen and (max-width:600px) {
+    .profile__edit {
+        width: 18px;
+        height: 18px;
+        margin-left: 0;
+    }
 }

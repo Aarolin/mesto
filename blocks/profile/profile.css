@@ -3,7 +3,7 @@
 @import url('./__info/profile__info.css');
 @import url('./__data/profile__data.css');
 @import url('./__name/profile__name.css');
-@import url('./__status/profile__status.css');
+@import url('./__about-self/profile__about-self.css');
 @import url('./__edit/profile__edit.css');
 @import url('./__add/profile__add.css');
 
@@ -11,4 +11,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+@media screen and (max-width:720px) {
+    .profile {
+        flex-direction: column;
+    }
 }

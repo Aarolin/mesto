@@ -1,8 +1,22 @@
 .elements__list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: repeat(auto-fit, 282px);
+    grid-template-rows: repeat(auto-fit, min-content);
     gap: 21px 18px;
     padding: 0;
     list-style-type: none;
+}
+
+@media screen and (max-width:960px) {
+    .elements__list {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .elements__list {
+        grid-template-columns: repeat(1, 282px);
+        grid-template-rows: repeat(auto-fit, min-content);
+        gap: 20px;
+    }
 }
