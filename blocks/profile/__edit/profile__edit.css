@@ -1,6 +1,6 @@
 .profile__edit {
     width: 24px;
-    height: 24px;
+    max-height: 24px;
     border: 1px solid #FFFFFF;
     background-image: url('../../../images/profile-edit.svg');
     background-repeat: no-repeat;
@@ -17,7 +17,7 @@
 @media screen and (max-width:600px) {
     .profile__edit {
         width: 18px;
-        height: 18px;
+        max-height: 18px;
         margin-left: 12px;
         margin-top: 30px;
     }

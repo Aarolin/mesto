@@ -1,8 +1,8 @@
 @import url('../vendor/normalize.css');
 @import url('../vendor/fonts/fonts.css');
 @import url('../blocks/page/page.css');
-@import url('../blocks/page/_form_is-open/page_form_is-open.css');
 @import url('../blocks/page-content/page-content.css');
+@import url('../blocks/page-content/_form_is-open/page-content_form_is-open.css');
 @import url('../blocks/header/header.css');
 @import url('../blocks/profiles/profiles.css');
 @import url('../blocks/profile/profile.css');

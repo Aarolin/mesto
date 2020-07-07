@@ -2,7 +2,7 @@
     background-image: url('../../../images/elements-like.svg');
     background-repeat: no-repeat;
     width: 22px;
-    height: 18px;
+    min-height: 18px;
     align-self: center;
     transition: opacity 0.2s linear;
 }
