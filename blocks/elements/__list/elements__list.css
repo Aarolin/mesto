@@ -10,13 +10,26 @@
 @media screen and (max-width:960px) {
     .elements__list {
         justify-content: center;
+        gap: 20px;
+        grid-template-columns: repeat(auto-fit, 340px);
     }
 }
 
+@media screen and (max-width:720px) {
+    .elements__list {
+        grid-template-columns: repeat(auto-fit, 270px);
+    }
+}
+
+@media screen and (max-width:600px) {
+    .elements__list {
+        grid-template-columns: repeat(auto-fit, 100%);
+    }
+}
+
+
 @media screen and (max-width:425px) {
     .elements__list {
-        grid-template-columns: repeat(1, 282px);
-        grid-template-rows: repeat(auto-fit, min-content);
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, 282px);
     }
 }
