@@ -3,5 +3,11 @@
 
 .header {
     width: 100%;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
+}
+
+@media screen and (max-width:600px) {
+    .header {
+        margin-bottom: 42px;
+    }
 }

@@ -9,3 +9,9 @@
 .elements {
     margin-bottom: 66px;
 }
+
+@media screen and (max-width:600px) {
+    .elements {
+        margin-bottom: 48px;
+    }
+}

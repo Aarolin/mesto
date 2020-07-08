@@ -20,6 +20,7 @@
 @media screen and (max-width:600px) {
     .page-content {
         max-width: 356px;
+        padding: 28px 0 36px;
     }
 }
 
