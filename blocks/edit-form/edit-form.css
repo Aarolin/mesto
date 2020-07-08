@@ -5,7 +5,6 @@
 @import url('./__button-save/edit-form__button-save.css');
 
 .edit-form {
-    display: none;
     max-width: 430px;
     width: 100%;
     position: fixed;
@@ -13,10 +12,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
     padding: 34px 36px 36px;
     box-sizing: border-box;
     border-radius: 10px;
+    opacity: 1;
 }
 
 @media screen and (max-width:540px) {

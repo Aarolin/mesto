@@ -11,11 +11,18 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 51px;
 }
 
 
 @media screen and (max-width:720px) {
     .profile {
         flex-direction: column;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .profile {
+        margin-bottom: 36px;
     }
 }

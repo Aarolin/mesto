@@ -1,9 +1,0 @@
-.profiles {
-    margin-bottom: 51px;
-}
-
-@media screen and (max-width:600px) {
-    .profiles {
-        margin-bottom: 36px;
-    }
-}

@@ -1,5 +1,5 @@
 const page = document.querySelector('.page');
-const pageContent = page.querySelector('.page-content');
+const popup = page.querySelector('.popup');
 const profileEdit = page.querySelector('.profile__edit');
 const editForm = page.querySelector('.edit-form');
 const buttonClose = page.querySelector('.edit-form__button-close');
@@ -11,15 +11,12 @@ fieldsText[0].value = profileName.textContent;
 fieldsText[1].value = profileAboutSelf.textContent;
 
 function toggleForm() {
-    editForm.classList.toggle('edit-form_visible');
-    pageContent.classList.toggle('page-content_form_is-open');
+    popup.classList.toggle('popup_visible');
 }
 
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
-    fieldsText[0].value = profileName.textContent;
-    fieldsText[1].value = profileAboutSelf.textContent;
 }
 
 buttonSave.addEventListener('click', function () {

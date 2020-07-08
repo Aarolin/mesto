@@ -1,12 +1,11 @@
 @import url('../vendor/normalize.css');
 @import url('../vendor/fonts/fonts.css');
 @import url('../blocks/page/page.css');
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/_visible/popup_visible.css');
 @import url('../blocks/page-content/page-content.css');
-@import url('../blocks/page-content/_form_is-open/page-content_form_is-open.css');
 @import url('../blocks/header/header.css');
-@import url('../blocks/profiles/profiles.css');
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/edit-form/edit-form.css');
-@import url('../blocks/edit-form/_visible/edit-form_visible.css');
