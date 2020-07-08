@@ -8,10 +8,10 @@
 
 @font-face {
   src:
-    url('Inter-700.woff2') format('woff2'),
-    url('Inter-700.woff') format('woff');
+    url('Inter-500.woff2') format('woff2'),
+    url('Inter-500.woff') format('woff');
   font-family: 'Inter';
-  font-weight: 700;
+  font-weight: 500;
 }
 
 @font-face {
