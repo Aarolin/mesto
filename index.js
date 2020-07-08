@@ -7,24 +7,20 @@ let fieldsText = page.querySelectorAll('.edit-form__field-text');
 const profileName = page.querySelector('.profile__name');
 const profileAboutSelf = page.querySelector('.profile__about-self');
 const buttonSave = page.querySelector('.edit-form__button-save');
+fieldsText[0].value = profileName.textContent;
+fieldsText[1].value = profileAboutSelf.textContent;
 
-
-function  toggleForm() {
+function toggleForm() {
     editForm.classList.toggle('edit-form_visible');
     pageContent.classList.toggle('page-content_form_is-open');
 }
 
-function fillForm() {
-    fieldsText[0].value = profileName.textContent;
-    fieldsText[1].value = profileAboutSelf.textContent;
-}
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
-    fillForm();
+    fieldsText[0].value = profileName.textContent;
+    fieldsText[1].value = profileAboutSelf.textContent;
 }
-
-fillForm();
 
 buttonSave.addEventListener('click', function () {
     profileName.textContent = fieldsText[0].value;
@@ -32,7 +28,6 @@ buttonSave.addEventListener('click', function () {
     toggleForm();
 });
 
-editForm.addEventListener('submit', formSubmitHandler);
-
 profileEdit.addEventListener('click', toggleForm);
 buttonClose.addEventListener('click', toggleForm);
+editForm.addEventListener('submit', formSubmitHandler);

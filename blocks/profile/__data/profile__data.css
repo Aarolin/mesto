@@ -4,7 +4,7 @@
 
 @media screen and (max-width:600px) {
     .profile__data {
-        max-width: 100%;
+        max-width: 242px;
         margin-top: 10px;
     }
 }

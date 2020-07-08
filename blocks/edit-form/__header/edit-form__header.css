@@ -8,3 +8,10 @@
     margin: 0;
     margin-bottom: 54px;
 }
+
+@media screen and (max-width:540px) {
+    .edit-form__header {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+}
