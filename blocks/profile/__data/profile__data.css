@@ -2,6 +2,12 @@
     max-width: 450px;
 }
 
+@media screen and (max-width:960px) {
+    .profile__data {
+        max-width: 386px;
+    }
+}
+
 @media screen and (max-width:600px) {
     .profile__data {
         max-width: 242px;

@@ -1,21 +1,18 @@
-@import url('./__container/edit-form__container.css');
 @import url('./__header/edit-form__header.css');
 @import url('./__field-text/edit-form__field-text.css');
 @import url('./__button-close/edit-form__button-close.css');
 @import url('./__button-save/edit-form__button-save.css');
 
 .edit-form {
+    display: flex;
+    flex-direction: column;
     max-width: 430px;
     width: 100%;
-    position: fixed;
-    background-color: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     padding: 34px 36px 36px;
-    box-sizing: border-box;
+    background-color: white;
     border-radius: 10px;
-    opacity: 1;
+    box-sizing: border-box;
+    position: fixed;
 }
 
 @media screen and (max-width:540px) {

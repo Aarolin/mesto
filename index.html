@@ -9,90 +9,87 @@
 </head>
 
 <body class="page">
-    <div class="popup">
-        <div class="popup__background">
-        </div>
-        <form action="#" class="edit-form">
-            <div class="edit-form__container">
-                <h2 class="edit-form__header">Редактировать профиль</h2>
-                <input type="text" class="edit-form__field-text">
-                <input type="text" class="edit-form__field-text">
-                <button class="edit-form__button-close"></button>
-                <button class="edit-form__button-save">Сохранить</button>
-            </div>
-        </form>
-    </div>
-    <div class="page-content">
-        <header class="header">
+    <div class="page__container">
+        <header class="page__header header">
             <img src="./images/header-logo.svg" alt="Логотип" class="header__logo">
-            <div class="header__line"></div>
         </header>
         <main>
-            <section class="profile">
+            <section class="profile page__content">
                 <div class="profile__about">
                     <img src="./images/profile-avatar.svg" alt="Аватар профиля" class="profile__avatar">
                     <div class="profile__info">
                         <div class="profile__data">
-                            <h2 class="profile__name">Жак-Ив Кусто</h2>
+                            <h1 class="profile__name">Жак-Ив Кусто</h1>
                             <p class="profile__about-self">Исследователь океана</p>
                         </div>
-                        <button class="profile__edit"></button>
+                        <button type="button" class="profile__edit"></button>
                     </div>
                 </div>
-                <button class="profile__add"></button>
+                <button type="button" class="profile__add"></button>
             </section>
-            <section class="elements">
+            <section class="elements page__content">
                 <ul class="elements__list">
                     <li class="elements__item">
-                        <img src="./images/Karachaevsk.jpg" alt="Карачаевск" class="elements__image">
+                        <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__image">
                         <div class="elements__label">
                             <h2 class="elements__header">Карачаевск</h2>
-                            <div class="elements__like"></div>
+                            <button type="button" class="elements__like"></button>
                         </div>
                     </li>
                     <li class="elements__item">
-                        <img src="./images/Elbrus.png" alt="Гора Эльбрус" class="elements__image">
+                        <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="elements__image">
                         <div class="elements__label">
                             <h2 class="elements__header">Гора Эльбрус</h2>
-                            <div class="elements__like"></div>
+                            <button type="button" class="elements__like"></button>
                         </div>
                     </li>
                     <li class="elements__item">
-                        <img src="./images/Dombai.png" alt="Домбай" class="elements__image">
+                        <img src="./images/dombai.jpg" alt="Домбай" class="elements__image">
                         <div class="elements__label">
                             <h2 class="elements__header">Домбай</h2>
-                            <div class="elements__like"></div>
+                            <button type="button" class="elements__like"></button>
                         </div>
                     </li>
                     <li class="elements__item">
-                        <img src="./images/Hibini.jpg" alt="Хибинские горы" class="elements__image">
+                        <img src="./images/hibini.jpg" alt="Хибинские горы" class="elements__image">
                         <div class="elements__label">
                             <h2 class="elements__header">Хибинские горы</h2>
-                            <div class="elements__like"></div>
+                            <button type="button" class="elements__like"></button>
                         </div>
                     </li>
                     <li class="elements__item">
-                        <img src="./images/Plato-Putorana.jpg" alt="Плато Путорана" class="elements__image">
+                        <img src="./images/plato-putorana.jpg" alt="Плато Путорана" class="elements__image">
                         <div class="elements__label">
                             <h2 class="elements__header">Плато Путорана</h2>
-                            <div class="elements__like"></div>
+                            <button type="button" class="elements__like"></button>
                         </div>
                     </li>
                     <li class="elements__item">
-                        <img src="./images/Geysers.jpg" alt="Долина Гейзеров" class="elements__image">
+                        <img src="./images/geysers.jpg" alt="Долина Гейзеров" class="elements__image">
                         <div class="elements__label">
                             <h2 class="elements__header">Долина Гейзеров</h2>
-                            <div class="elements__like"></div>
+                            <button type="button" class="elements__like"></button>
                         </div>
                     </li>
                 </ul>
             </section>
         </main>
-        <footer class="footer">
+        <footer class="footer page__content">
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
-    <script src="index.js"></script>
+    <div class="popup">
+        <div class="popup__background">
+        </div>
+        <form action="#" class="edit-form" name="profile-edit-form">
+            <h2 class="edit-form__header">Редактировать профиль</h2>
+            <input type="text" class="edit-form__field-text" name="profile-name" placeholder="Имя профиля" required>
+            <input type="text" class="edit-form__field-text" name="profile-job" placeholder="О себе" required>
+            <button type="button" class="edit-form__button-close"></button>
+            <button type="submit" class="edit-form__button-save">Сохранить</button>
+        </form>
+    </div>
+    <script src="./script/index.js"></script>
 </body>
 
 </html>

@@ -1,10 +1,12 @@
 .elements__like {
     background-image: url('../../../images/elements-like.svg');
     background-repeat: no-repeat;
+    background-color: transparent;
     width: 22px;
     min-height: 18px;
     align-self: center;
     transition: opacity 0.2s linear;
+    border: 0;
 }
 
 .elements__like:hover {

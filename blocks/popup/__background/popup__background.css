@@ -1,6 +1,6 @@
 .popup__background {
-    background-color: #000000;
+    background-color: black;
     opacity: 0.5;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
 }

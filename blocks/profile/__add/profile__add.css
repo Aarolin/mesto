@@ -26,12 +26,13 @@
 @media screen and (max-width:720px) {
     .profile__add {
         max-width: 45%;
-        margin-top: 28px;
+        margin-top: 36px;
     }
 }
 
 @media screen and (max-width:600px) {
     .profile__add {
         max-width: 100%;
+        margin-top: 0;
     }
 }
