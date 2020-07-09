@@ -8,11 +8,11 @@
     flex-direction: column;
     max-width: 430px;
     width: 100%;
+    position: relative;
     padding: 34px 36px 36px;
     background-color: white;
     border-radius: 10px;
     box-sizing: border-box;
-    position: fixed;
 }
 
 @media screen and (max-width:540px) {
