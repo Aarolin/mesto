@@ -14,8 +14,8 @@ function toggleForm() {
   //Если модальное окно не открыто, тогда открыть и записать данные в поля формы
   if(!popup.classList.contains('popup_visible')) {
     popup.classList.toggle('popup_visible');
-    inputName.value = profileName.textContent;
-    inputJob.value = profileAboutSelf.textContent;
+    inputName.setAttribute('value', profileName.textContent);
+    inputJob.setAttribute('value', profileAboutSelf.textContent);
   }
   //Иначе просто закрыть форму
   else {
