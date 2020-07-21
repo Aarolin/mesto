@@ -25,10 +25,10 @@
                         <button type="button" class="profile__edit"></button>
                     </div>
                 </div>
-                <button type="button" class="profile__add" aria-label="Добавить место"></button>
+                <button type="button" class="profile__add-place" aria-label="Добавить место"></button>
             </section>
             <section class="elements page__content">
-                <ul class="elements__list">
+                <!-- <ul class="elements__list">
                     <li class="elements__item">
                         <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__image">
                         <div class="elements__label">
@@ -71,6 +71,9 @@
                             <button type="button" class="elements__like" aria-label="Поставить лайк"></button>
                         </div>
                     </li>
+                </ul> -->
+                <ul class="elements__list">
+
                 </ul>
             </section>
         </main>
@@ -78,17 +81,37 @@
             <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
         </footer>
     </div>
-    <div class="popup">
-        <div class="popup__background">
+    <div class="profile-popup">
+        <div class="profile-popup__background">
         </div>
-        <form action="#" class="edit-form" name="profile-edit-form">
-            <h2 class="edit-form__header">Редактировать профиль</h2>
-            <input type="text" class="edit-form__field-text" name="profile-name" placeholder="Имя профиля" required>
-            <input type="text" class="edit-form__field-text" name="profile-job" placeholder="О себе" required>
-            <button type="button" class="edit-form__button-close" aria-label="Закрыть форму"></button>
-            <button type="submit" class="edit-form__button-save">Сохранить</button>
-        </form>
+      <form action="#" class="edit-form" name="profile-edit-form">
+        <h2 class="edit-form__header">Редактировать профиль</h2>
+        <input type="text" class="edit-form__field-text" name="profile-name" placeholder="Введите имя" required>
+        <input type="text" class="edit-form__field-text" name="profile-job" placeholder="О себе" required>
+        <button type="button" class="edit-form__button-close" aria-label="Закрыть форму"></button>
+        <button type="submit" class="edit-form__button-save">Сохранить</button>
+      </form>
     </div>
+    <div class="place-popup">
+      <div class="place-popup__background">
+      </div>
+      <form action="#" class="place-edit-form" name="place-edit-form">
+        <h2 class="place-edit-form__header">Новое место</h2>
+        <input type="text" class="place-edit-form__field-text" name="place-name" placeholder="Название" required>
+        <input type="text" class="place-edit-form__field-text" name="place-reference" placeholder="Ссылка на картинку" required>
+        <button type="button" class="place-edit-form__button-close" aria-label="Закрыть форму"></button>
+        <button type="submit" class="place-edit-form__button-save">Создать  </button>
+      </form>
+    </div>
+    <template id="cards">
+      <li class="elements__item">
+          <img src="" alt="" class="elements__image">
+        <div class="elements__label">
+            <h2 class="elements__header"></h2>
+            <button type="button" class="elements__like" aria-label="Поставить лайк"></button>
+        </div>
+      </li>
+    </template>
     <script src="./script/index.js"></script>
 </body>
 

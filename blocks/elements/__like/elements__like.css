@@ -5,11 +5,16 @@
     width: 22px;
     min-height: 18px;
     align-self: center;
-    transition: opacity 0.2s linear;
+    transition: opacity 0.2s, transform 0.2s linear;
     border: 0;
 }
 
 .elements__like:hover {
     opacity: 0.5;
     cursor: pointer;
+    transform: scale(1.2);
+}
+
+.elements__like:active {
+  background-image: url('../../../images/elements-dark-like.svg');
 }

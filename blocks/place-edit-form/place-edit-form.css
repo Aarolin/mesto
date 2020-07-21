@@ -1,0 +1,23 @@
+@import url('./__header/place-edit-form__header.css');
+@import url('./__field-text/place-edit-form__field-text.css');
+@import url('./__button-close/place-edit-form__button-close.css');
+@import url('./__button-save/place-edit-form__button-save.css');
+
+.place-edit-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 430px;
+    width: 100%;
+    position: relative;
+    padding: 34px 36px 36px;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width:540px) {
+    .place-edit-form {
+        max-width: 246px;
+        padding: 17px 18px 18px;
+    }
+}

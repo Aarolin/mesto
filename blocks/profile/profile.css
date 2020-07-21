@@ -5,7 +5,7 @@
 @import url('./__name/profile__name.css');
 @import url('./__about-self/profile__about-self.css');
 @import url('./__edit/profile__edit.css');
-@import url('./__add/profile__add.css');
+@import url('__add-place/profile__add-place.css');
 
 .profile {
     display: flex;
