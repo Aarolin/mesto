@@ -1,0 +1,5 @@
+@import url('__background/popup__background.css');
+
+.popup {
+    display: none;
+}

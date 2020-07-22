@@ -1,18 +1,37 @@
 //Получаем необходимые DOM элементы
 const page = document.querySelector('.page');
+
+//Модалки
 const profilePopup = page.querySelector('.profile-popup');
+const placePopup = page.querySelector('.place-popup');
+
+//Кнопки редактирования
 const profileEdit = page.querySelector('.profile__edit');
-const placeEdit = page.querySelector('.profile__add-place');
-const profilEditForm = page.querySelector('.edit-form');
-const placEditForm = page.querySelector('.place-edit-form');
-const inputName = page.querySelector('.edit-form__field-text[name=profile-name]');
-const inputJob = page.querySelector('.edit-form__field-text[name=profile-job]');
+const addPlace = page.querySelector('.profile__add-place');
+
+//Формы
+const profileFormEdit = profilePopup.querySelector('.edit-form');
+const placeFormEdit = placePopup.querySelector('.edit-form');
+
+//Инпуты из модалки для профиля
+const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
+const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
+ 
+//Инпуты из модалки для карточек
+const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=place-name]');
+const placeReference = placeFormEdit.querySelector('.edit-form__field-text[name=place-reference]');
+
+//Поля из профиля
 const profileName = page.querySelector('.profile__name');
 const profileAboutSelf = page.querySelector('.profile__about-self');
-const profileButtonClose = page.querySelector('.edit-form__button-close');
-const placePopup = page.querySelector('.place-popup');
-const placeButtonClose = page.querySelector('.place-edit-form__button-close');
-const placeButtonSave = page.querySelector('.place-edit-form__button-save');
+
+//Кнопка закрыть модалки профиля
+const profileButtonClose = profilePopup.querySelector('.edit-form__button-close');
+
+//Кнопки для модалки карточек
+const placeButtonClose = placePopup.querySelector('.edit-form__button-close');
+
+//Начальный массив карточек
 const initialCards = [
   {
     name: 'Архыз',
@@ -39,53 +58,67 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-const cardTemplate = page.querySelector('#cards').content;
+
+//Шаблон для карточек
+const cardTemplate = document.querySelector('#place-card').content;
 const usersCards = document.querySelector('.elements__list');
-function renderCards() {
-  for(let i = 0; i < initialCards.length; i++) {
-    const copyCard = cardTemplate.cloneNode(true);
-    copyCard.querySelector('.elements__header').textContent = initialCards[i].name;
-    copyCard.querySelector('.elements__image').src = initialCards[i].link;
-    usersCards.append(copyCard);
-  }
-}
-function addCard(event) {
-  event.preventDefault();
-  const placeName = placEditForm.querySelector('.place-edit-form__field-text[name=place-name]');
-  const placeReference = placEditForm.querySelector('.place-edit-form__field-text[name=place-reference]');
+
+function createCard(obj) {
   const copyCard = cardTemplate.cloneNode(true);
-  copyCard.querySelector('.elements__header').textContent = placeName.value;
-  copyCard.querySelector('.elements__image').src = placeReference.value;
-  usersCards.prepend(copyCard);
-  togglePlaceForm();
+  copyCard.querySelector('.elements__header').textContent = obj.name;
+  copyCard.querySelector('.elements__image').src = obj.link;
+  return copyCard;
 }
+
+function renderCards(obj) {
+  usersCards.append(createCard(obj));
+}
+function addCard(obj) {
+  usersCards.prepend(createCard(obj));
+}
+
+initialCards.forEach((obj) => {
+  renderCards(obj);
+});
+
 //Функция обработчик открытия модального окна
-function toggleProfileForm() {
-  if (!profilePopup.classList.contains('profile-popup_visible')) {
-    profilePopup.classList.toggle('profile-popup_visible');
+function toggleModal(modalForm) {
+  if (!modalForm.classList.contains('popup_visible')) {
     inputName.setAttribute('value', profileName.textContent);
     inputJob.setAttribute('value', profileAboutSelf.textContent);
   }
-  else {
-    profilePopup.classList.toggle('profile-popup_visible');
-  }
+  modalForm.classList.toggle('popup_visible');
 }
 
 function togglePlaceForm() {
   placePopup.classList.toggle('place-popup_visible');
 }
 
-function formSubmitHandler(evt) {
+function formSubmitHandler(event) {
   //Отменяем перезагрузку страницы после закрытия и сохранения формы
-  evt.preventDefault();
+  event.preventDefault();
   profileName.textContent = inputName.value;
   profileAboutSelf.textContent = inputJob.value;
-  toggleProfileForm();
+  toggleModal(profilePopup);
 }
-renderCards();
-placeEdit.addEventListener('click', togglePlaceForm);
-profileEdit.addEventListener('click', toggleProfileForm);
-profileButtonClose.addEventListener('click', toggleProfileForm);
-placeButtonClose.addEventListener('click', togglePlaceForm);
-profilEditForm.addEventListener('submit', formSubmitHandler);
-placEditForm.addEventListener('submit', addCard);
+
+function addPlaceSubmitHandler(event) {
+  event.preventDefault();
+  addCard({name: placeName.value, link: placeReference.value});
+  toggleModal(placePopup);
+}
+
+profileEdit.addEventListener('click', () => {
+  toggleModal(profilePopup);
+});
+profileButtonClose.addEventListener('click', () => {
+  toggleModal(profilePopup);
+});
+addPlace.addEventListener('click', () => {
+  toggleModal(placePopup);
+});
+placeButtonClose.addEventListener('click', () => {
+  toggleModal(placePopup);
+});
+profileFormEdit.addEventListener('submit', formSubmitHandler);
+placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
