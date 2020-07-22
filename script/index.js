@@ -16,7 +16,7 @@ const placeFormEdit = placePopup.querySelector('.edit-form');
 //Инпуты из модалки для профиля
 const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
 const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
- 
+
 //Инпуты из модалки для карточек
 const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=place-name]');
 const placeReference = placeFormEdit.querySelector('.edit-form__field-text[name=place-reference]');
@@ -65,6 +65,16 @@ const usersCards = document.querySelector('.elements__list');
 
 function createCard(obj) {
   const copyCard = cardTemplate.cloneNode(true);
+  const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
+  const cardLikeButton = copyCard.querySelector('.elements__like');
+  cardDeleteButton.addEventListener('click',  () =>  {
+    const deleteItem = cardDeleteButton.closest('.elements__item');
+    deleteItem.remove();
+  });
+  cardLikeButton.addEventListener('click', ()  => {
+    cardLikeButton.classList.toggle('elements__like_disabled');
+    cardLikeButton.classList.toggle('elements__like_active');
+  });
   copyCard.querySelector('.elements__header').textContent = obj.name;
   copyCard.querySelector('.elements__image').src = obj.link;
   return copyCard;

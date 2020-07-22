@@ -1,4 +1,19 @@
 .elements__recycle-bin {
-    background-image: url('');
-    
+    background-image: url('../../../images/recycle-bin.png');
+    max-width: 19px;
+    width: 100%;
+    height: 19px;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    background-repeat: no-repeat;
+    border: 0;
+    background-color: transparent;
+    transition: 0.2s linear;
+}
+
+.elements__recycle-bin:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  transform: scale(1.1);
 }
