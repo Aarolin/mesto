@@ -4,6 +4,7 @@ const page = document.querySelector('.page');
 //Модалки
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
+const imagePopup = page.querySelector('.image-popup');
 
 //Кнопки редактирования
 const profileEdit = page.querySelector('.profile__edit');
@@ -13,9 +14,17 @@ const addPlace = page.querySelector('.profile__add-place');
 const profileFormEdit = profilePopup.querySelector('.edit-form');
 const placeFormEdit = placePopup.querySelector('.edit-form');
 
+//Элемент figure, в котором лежит изображение
+const figurePopup = imagePopup.querySelector('.popup__figure');
+
 //Инпуты из модалки для профиля
 const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
 const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
+
+
+//Картинка и подпись из figure
+const imgOfFigure = figurePopup.querySelector('.popup__image');
+const figureCaption = figurePopup.querySelector('.popup__caption');
 
 //Инпуты из модалки для карточек
 const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=place-name]');
@@ -30,6 +39,9 @@ const profileButtonClose = profilePopup.querySelector('.edit-form__button-close'
 
 //Кнопки для модалки карточек
 const placeButtonClose = placePopup.querySelector('.edit-form__button-close');
+
+//Кнопка закрыть модалки с изображением
+const imagePopupButtonClose = imagePopup.querySelector('.edit-form__button-close');
 
 //Начальный массив карточек
 const initialCards = [
@@ -63,10 +75,14 @@ const initialCards = [
 const cardTemplate = document.querySelector('#place-card').content;
 const usersCards = document.querySelector('.elements__list');
 
+//Background popup
+const backgroundPopup = imagePopup.querySelector('.popup__background');
+
 function createCard(obj) {
   const copyCard = cardTemplate.cloneNode(true);
   const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
   const cardLikeButton = copyCard.querySelector('.elements__like');
+  const cardImage = copyCard.querySelector('.elements__image');
   cardDeleteButton.addEventListener('click',  () =>  {
     const deleteItem = cardDeleteButton.closest('.elements__item');
     deleteItem.remove();
@@ -75,8 +91,16 @@ function createCard(obj) {
     cardLikeButton.classList.toggle('elements__like_disabled');
     cardLikeButton.classList.toggle('elements__like_active');
   });
+  cardImage.addEventListener('click', () => {
+    imgOfFigure.src = obj.link;
+    imgOfFigure.alt = obj.name;
+    figureCaption.textContent = obj.name;
+    backgroundPopup.classList.toggle('popup__background_painted');
+    imagePopup.classList.toggle('popup_visible');
+  })
   copyCard.querySelector('.elements__header').textContent = obj.name;
-  copyCard.querySelector('.elements__image').src = obj.link;
+  cardImage.src = obj.link;
+  cardImage.alt  = obj.name;
   return copyCard;
 }
 
@@ -129,6 +153,11 @@ addPlace.addEventListener('click', () => {
 });
 placeButtonClose.addEventListener('click', () => {
   toggleModal(placePopup);
+});
+
+imagePopupButtonClose.addEventListener('click',  () => {
+  toggleModal(imagePopup);
+  backgroundPopup.classList.toggle('popup__background_painted');
 });
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
