@@ -95,7 +95,7 @@ function createCard(obj) {
     imgOfFigure.src = obj.link;
     imgOfFigure.alt = obj.name;
     figureCaption.textContent = obj.name;
-    backgroundPopup.classList.toggle('popup__background_painted');
+    backgroundPopup.classList.add('popup__background_painted');
     imagePopup.classList.toggle('popup_visible');
   })
   copyCard.querySelector('.elements__header').textContent = obj.name;
@@ -104,28 +104,21 @@ function createCard(obj) {
   return copyCard;
 }
 
-function renderCards(obj) {
-  usersCards.append(createCard(obj));
-}
 function addCard(obj) {
   usersCards.prepend(createCard(obj));
 }
 
-initialCards.forEach((obj) => {
-  renderCards(obj);
-});
-
-//Функция обработчик открытия модального окна
-function toggleModal(modalForm) {
-  if (!modalForm.classList.contains('popup_visible')) {
+function checkProfileForm() {
+  if (!profilePopup.classList.contains('popup_visible')) {
     inputName.setAttribute('value', profileName.textContent);
     inputJob.setAttribute('value', profileAboutSelf.textContent);
   }
-  modalForm.classList.toggle('popup_visible');
 }
 
-function togglePlaceForm() {
-  placePopup.classList.toggle('place-popup_visible');
+//Функция обработчик открытия модального окна
+function toggleModal(modalForm) {
+  checkProfileForm();
+  modalForm.classList.toggle('popup_visible');
 }
 
 function formSubmitHandler(event) {
@@ -142,6 +135,10 @@ function addPlaceSubmitHandler(event) {
   toggleModal(placePopup);
 }
 
+initialCards.forEach((obj) => {
+  addCard(obj);
+ });
+
 profileEdit.addEventListener('click', () => {
   toggleModal(profilePopup);
 });
@@ -157,7 +154,6 @@ placeButtonClose.addEventListener('click', () => {
 
 imagePopupButtonClose.addEventListener('click',  () => {
   toggleModal(imagePopup);
-  backgroundPopup.classList.toggle('popup__background_painted');
 });
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
