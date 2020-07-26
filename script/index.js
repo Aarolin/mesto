@@ -100,12 +100,12 @@ function createCard(obj) {
   })
   copyCard.querySelector('.elements__header').textContent = obj.name;
   cardImage.src = obj.link;
-  cardImage.alt  = obj.name;
+  cardImage.alt = obj.name;
   return copyCard;
 }
 
-function addCard(obj) {
-  usersCards.prepend(createCard(obj));
+function addCard(card) {
+  usersCards.prepend(card);
 }
 
 function checkProfileForm() {
@@ -117,7 +117,6 @@ function checkProfileForm() {
 
 //Функция обработчик открытия модального окна
 function toggleModal(modalForm) {
-  checkProfileForm();
   modalForm.classList.toggle('popup_visible');
 }
 
@@ -131,15 +130,12 @@ function formSubmitHandler(event) {
 
 function addPlaceSubmitHandler(event) {
   event.preventDefault();
-  addCard({name: placeName.value, link: placeReference.value});
+  addCard(createCard({name: placeName.value, link: placeReference.value}));
   toggleModal(placePopup);
 }
 
-initialCards.forEach((obj) => {
-  addCard(obj);
- });
-
 profileEdit.addEventListener('click', () => {
+  checkProfileForm();
   toggleModal(profilePopup);
 });
 profileButtonClose.addEventListener('click', () => {
@@ -157,3 +153,7 @@ imagePopupButtonClose.addEventListener('click',  () => {
 });
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
+initialCards.forEach((obj) => {
+  addCard(createCard(obj));
+ });
+
