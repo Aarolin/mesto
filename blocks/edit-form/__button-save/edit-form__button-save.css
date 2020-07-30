@@ -10,6 +10,7 @@
     font-size: 18px;
     line-height: 22px;
     border: 0;
+    border-radius: 2px;
 }
 .edit-form__button-save:hover  {
     background-color: rgba(0, 0, 0, 0.8);

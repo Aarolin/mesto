@@ -156,4 +156,3 @@ placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 initialCards.forEach((obj) => {
   addCard(createCard(obj));
  });
-
