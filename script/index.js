@@ -5,6 +5,7 @@ const page = document.querySelector('.page');
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
 const imagePopup = page.querySelector('.image-popup');
+const popupBackground = page.querySelectorAll('.popup__background');
 
 //Кнопки редактирования
 const profileEdit = page.querySelector('.profile__edit');
@@ -138,7 +139,7 @@ profileEdit.addEventListener('click', () => {
   checkProfileForm();
   toggleModal(profilePopup);
 });
-profileButtonClose.addEventListener('click', () => {
+profileButtonClose.addEventListener('click', (evt) => {
   toggleModal(profilePopup);
 });
 addPlace.addEventListener('click', () => {
@@ -147,12 +148,19 @@ addPlace.addEventListener('click', () => {
 placeButtonClose.addEventListener('click', () => {
   toggleModal(placePopup);
 });
-
 imagePopupButtonClose.addEventListener('click',  () => {
   toggleModal(imagePopup);
 });
+
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
+
 initialCards.forEach((obj) => {
   addCard(createCard(obj));
+ });
+
+ popupBackground.forEach((item) => {
+   item.addEventListener('click', (evt) => {
+     evt.target.closest('.popup').classList.remove('popup_visible');
+   });
  });

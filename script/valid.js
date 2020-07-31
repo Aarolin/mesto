@@ -1,4 +1,4 @@
-//TODO: правильные стили для span, убрать наведение когда кнопка disabled, закрытие overlay
+//TODO: проверка корректности полей при первом открытии
 
 function showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
@@ -44,8 +44,11 @@ function showInputError(formElement, inputElement, errorMessage) {
   function setEventListeners(formElement) {
     const inputList = Array.from(formElement.querySelectorAll('.edit-form__field-text'));
     const buttonElement = formElement.querySelector('.edit-form__button-save');
-    toggleButtonState(inputList, buttonElement);
-  
+    if(formElement.name.includes('place-edit-form')) {
+      toggleButtonState(inputList, buttonElement);
+    }
+    
+
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         checkInputValidity(formElement, inputElement);
