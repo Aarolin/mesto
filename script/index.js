@@ -5,7 +5,9 @@ const page = document.querySelector('.page');
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
 const imagePopup = page.querySelector('.image-popup');
+const popups = Array.from(page.querySelectorAll('.popup'));
 const popupBackground = page.querySelectorAll('.popup__background');
+
 
 //Кнопки редактирования
 const profileEdit = page.querySelector('.profile__edit');
@@ -15,13 +17,15 @@ const addPlace = page.querySelector('.profile__add-place');
 const profileFormEdit = profilePopup.querySelector('.edit-form');
 const placeFormEdit = placePopup.querySelector('.edit-form');
 
+//Кнопки, закрывающие формы
+const closeButtons = page.querySelectorAll('.edit-form__button-close');
+
 //Элемент figure, в котором лежит изображение
 const figurePopup = imagePopup.querySelector('.popup__figure');
 
 //Инпуты из модалки для профиля
 const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
 const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
-
 
 //Картинка и подпись из figure
 const imgOfFigure = figurePopup.querySelector('.popup__image');
@@ -34,15 +38,6 @@ const placeReference = placeFormEdit.querySelector('.edit-form__field-text[name=
 //Поля из профиля
 const profileName = page.querySelector('.profile__name');
 const profileAboutSelf = page.querySelector('.profile__about-self');
-
-//Кнопка закрыть модалки профиля
-const profileButtonClose = profilePopup.querySelector('.edit-form__button-close');
-
-//Кнопки для модалки карточек
-const placeButtonClose = placePopup.querySelector('.edit-form__button-close');
-
-//Кнопка закрыть модалки с изображением
-const imagePopupButtonClose = imagePopup.querySelector('.edit-form__button-close');
 
 //Начальный массив карточек
 const initialCards = [
@@ -84,11 +79,11 @@ function createCard(obj) {
   const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
   const cardLikeButton = copyCard.querySelector('.elements__like');
   const cardImage = copyCard.querySelector('.elements__image');
-  cardDeleteButton.addEventListener('click',  () =>  {
+  cardDeleteButton.addEventListener('click', () => {
     const deleteItem = cardDeleteButton.closest('.elements__item');
     deleteItem.remove();
   });
-  cardLikeButton.addEventListener('click', ()  => {
+  cardLikeButton.addEventListener('click', () => {
     cardLikeButton.classList.toggle('elements__like_disabled');
     cardLikeButton.classList.toggle('elements__like_active');
   });
@@ -131,36 +126,57 @@ function formSubmitHandler(event) {
 
 function addPlaceSubmitHandler(event) {
   event.preventDefault();
-  addCard(createCard({name: placeName.value, link: placeReference.value}));
+  addCard(createCard({ name: placeName.value, link: placeReference.value }));
   toggleModal(placePopup);
+}
+
+function popupOpened(popupsList) {
+  return popupsList.some((popup) => {
+    return popup.classList.contains('popup_visible');
+  });
+}
+
+function switchPopup(popupsList) {
+  popupsList.forEach((popup) => {
+    if (popup.classList.contains('popup_visible')) {
+      toggleModal(popup);
+    }
+  });
 }
 
 profileEdit.addEventListener('click', () => {
   checkProfileForm();
   toggleModal(profilePopup);
 });
-profileButtonClose.addEventListener('click', (evt) => {
-  toggleModal(profilePopup);
-});
+
 addPlace.addEventListener('click', () => {
   toggleModal(placePopup);
-});
-placeButtonClose.addEventListener('click', () => {
-  toggleModal(placePopup);
-});
-imagePopupButtonClose.addEventListener('click',  () => {
-  toggleModal(imagePopup);
 });
 
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+    if (popupOpened(popups)) {
+      switchPopup(popups);
+    }
+  }
+});
+
 initialCards.forEach((obj) => {
   addCard(createCard(obj));
- });
+});
 
- popupBackground.forEach((item) => {
-   item.addEventListener('click', (evt) => {
-     evt.target.closest('.popup').classList.remove('popup_visible');
-   });
- });
+//Закрытие overlay
+popupBackground.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    evt.target.closest('.popup').classList.remove('popup_visible');
+  });
+});
+
+closeButtons.forEach((button) => {
+  button.addEventListener('click', (evt) => {
+    toggleModal(evt.target.closest('.popup'));
+  });
+});
