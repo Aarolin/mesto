@@ -5,6 +5,8 @@ const page = document.querySelector('.page');
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
 const imagePopup = page.querySelector('.image-popup');
+
+//Бекграунд для использования overlay закрытия
 const popupBackground = page.querySelectorAll('.popup__background');
 
 //Кнопки редактирования
@@ -135,13 +137,25 @@ function addPlaceSubmitHandler(event) {
   toggleModal(placePopup);
 }
 
+function formCloseHandler(popup) {
+  toggleModal(popup);
+}
+
+document.addEventListener('keydown', (evt) => {
+  if(evt.key === 'Escape') {
+    const activePopup = page.querySelector('.popup_visible');
+    formCloseHandler(activePopup);
+  }
+});
+
 profileEdit.addEventListener('click', () => {
   checkProfileForm();
   toggleModal(profilePopup);
 });
-profileButtonClose.addEventListener('click', (evt) => {
+profileButtonClose.addEventListener('click', () => {
   toggleModal(profilePopup);
 });
+
 addPlace.addEventListener('click', () => {
   toggleModal(placePopup);
 });
@@ -152,15 +166,17 @@ imagePopupButtonClose.addEventListener('click',  () => {
   toggleModal(imagePopup);
 });
 
+
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
+
+popupBackground.forEach((item) => {
+  item.addEventListener('click', (evt) => {
+    evt.target.closest('.popup').classList.remove('popup_visible');
+  });
+});
 
 initialCards.forEach((obj) => {
   addCard(createCard(obj));
  });
 
- popupBackground.forEach((item) => {
-   item.addEventListener('click', (evt) => {
-     evt.target.closest('.popup').classList.remove('popup_visible');
-   });
- });
