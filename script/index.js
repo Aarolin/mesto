@@ -20,6 +20,9 @@ const placeFormEdit = placePopup.querySelector('.edit-form');
 //Кнопки, закрывающие формы
 const closeButtons = page.querySelectorAll('.edit-form__button-close');
 
+//Кнопка сохранения формы с местом
+const placeButtonSave = placePopup.querySelector('.edit-form__button-save');
+
 //Элемент figure, в котором лежит изображение
 const figurePopup = imagePopup.querySelector('.popup__figure');
 
@@ -111,6 +114,23 @@ function checkProfileForm() {
   }
 }
 
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+function toggleButtonState(inputList, buttonElement) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('edit-form__button-save_inactive');
+    buttonElement.disabled = true;
+  }
+  else {
+    buttonElement.classList.remove('edit-form__button-save_inactive');
+    buttonElement.disabled = false;
+  }
+}
+
 //Функция обработчик открытия модального окна
 function toggleModal(modalForm) {
   modalForm.classList.toggle('popup_visible');
@@ -128,6 +148,9 @@ function addPlaceSubmitHandler(event) {
   event.preventDefault();
   addCard(createCard({ name: placeName.value, link: placeReference.value }));
   toggleModal(placePopup);
+  placeName.value = '';
+  placeReference.value = '';
+  toggleButtonState([placeName, placeReference], placeButtonSave);
 }
 
 function popupOpened(popupsList) {
@@ -144,9 +167,21 @@ function switchPopup(popupsList) {
   });
 }
 
+function addDocumentKeyDownListener(evt) {
+  console.log('Hello');
+  if (evt.key === 'Escape') {
+    if (popupOpened(popups)) {
+      switchPopup(popups);
+    }
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
+  }
+}
+
+
 profileEdit.addEventListener('click', () => {
   checkProfileForm();
   toggleModal(profilePopup);
+  document.addEventListener('keydown', addDocumentKeyDownListener);
 });
 
 addPlace.addEventListener('click', () => {
@@ -156,13 +191,6 @@ addPlace.addEventListener('click', () => {
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    if (popupOpened(popups)) {
-      switchPopup(popups);
-    }
-  }
-});
 
 initialCards.forEach((obj) => {
   addCard(createCard(obj));
