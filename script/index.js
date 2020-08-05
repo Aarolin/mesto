@@ -18,7 +18,7 @@ const profileFormEdit = profilePopup.querySelector('.edit-form');
 const placeFormEdit = placePopup.querySelector('.edit-form');
 
 //Кнопки, закрывающие формы
-const closeButtons = page.querySelectorAll('.edit-form__button-close');
+const closeButtons = page.querySelectorAll('.button-close');
 
 //Кнопка сохранения формы с местом
 const placeButtonSave = placePopup.querySelector('.edit-form__button-save');
@@ -77,6 +77,14 @@ const usersCards = document.querySelector('.elements__list');
 //Background popup
 const backgroundPopup = imagePopup.querySelector('.popup__background');
 
+//Закрытие на модалок на кнопку Escape
+function addDocumentKeyDownListener(evt) {
+  if (evt.key === 'Escape') {
+    toggleModal(popupOpened(popups));
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
+  }
+}
+
 function createCard(obj) {
   const copyCard = cardTemplate.cloneNode(true);
   const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
@@ -96,6 +104,7 @@ function createCard(obj) {
     figureCaption.textContent = obj.name;
     backgroundPopup.classList.add('popup__background_painted');
     imagePopup.classList.toggle('popup_visible');
+    document.addEventListener('keydown', addDocumentKeyDownListener);
   })
   copyCard.querySelector('.elements__header').textContent = obj.name;
   cardImage.src = obj.link;
@@ -114,23 +123,6 @@ function checkProfileForm() {
   }
 }
 
-function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
-
-function toggleButtonState(inputList, buttonElement) {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('edit-form__button-save_inactive');
-    buttonElement.disabled = true;
-  }
-  else {
-    buttonElement.classList.remove('edit-form__button-save_inactive');
-    buttonElement.disabled = false;
-  }
-}
-
 //Функция обработчик открытия модального окна
 function toggleModal(modalForm) {
   modalForm.classList.toggle('popup_visible');
@@ -142,6 +134,7 @@ function formSubmitHandler(event) {
   profileName.textContent = inputName.value;
   profileAboutSelf.textContent = inputJob.value;
   toggleModal(profilePopup);
+  document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
 function addPlaceSubmitHandler(event) {
@@ -151,32 +144,18 @@ function addPlaceSubmitHandler(event) {
   placeName.value = '';
   placeReference.value = '';
   toggleButtonState([placeName, placeReference], placeButtonSave);
+  document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
 function popupOpened(popupsList) {
-  return popupsList.some((popup) => {
-    return popup.classList.contains('popup_visible');
-  });
-}
-
-function switchPopup(popupsList) {
+  let openedPopup;
   popupsList.forEach((popup) => {
     if (popup.classList.contains('popup_visible')) {
-      toggleModal(popup);
+      openedPopup = popup;
     }
   });
+  return openedPopup;
 }
-
-function addDocumentKeyDownListener(evt) {
-  console.log('Hello');
-  if (evt.key === 'Escape') {
-    if (popupOpened(popups)) {
-      switchPopup(popups);
-    }
-    document.removeEventListener('keydown', addDocumentKeyDownListener);
-  }
-}
-
 
 profileEdit.addEventListener('click', () => {
   checkProfileForm();
@@ -186,6 +165,7 @@ profileEdit.addEventListener('click', () => {
 
 addPlace.addEventListener('click', () => {
   toggleModal(placePopup);
+  document.addEventListener('keydown', addDocumentKeyDownListener);
 });
 
 profileFormEdit.addEventListener('submit', formSubmitHandler);
@@ -200,11 +180,14 @@ initialCards.forEach((obj) => {
 popupBackground.forEach((item) => {
   item.addEventListener('click', (evt) => {
     evt.target.closest('.popup').classList.remove('popup_visible');
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
   });
 });
 
+//Закрытие на кнопку закрыть
 closeButtons.forEach((button) => {
   button.addEventListener('click', (evt) => {
-    toggleModal(evt.target.closest('.popup'));
+    evt.target.closest('.popup').classList.remove('popup_visible');
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
   });
 });

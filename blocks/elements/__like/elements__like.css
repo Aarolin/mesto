@@ -9,6 +9,7 @@
     align-self: center;
     transition: opacity 0.2s, transform 0.2s linear;
     border: 0;
+    outline: none;
 }
 
 .elements__like:hover {
