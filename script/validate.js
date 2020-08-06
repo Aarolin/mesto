@@ -1,4 +1,3 @@
-//TODO: проверка корректности полей при первом открытии
 
 function showInputError(formElement, inputElement, errorMessage) {
     const errorElement = formElement.querySelector(`#${inputElement.name}-error`);

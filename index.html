@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +22,10 @@
                             <h1 class="profile__name">Жак-Ив Кусто</h1>
                             <p class="profile__about-self">Исследователь океана</p>
                         </div>
-                        <button type="button" class="profile__edit"></button>
+                        <button type="button" class="button-open profile__edit"></button>
                     </div>
                 </div>
-                <button type="button" class="profile__add-place" aria-label="Добавить место"></button>
+                <button type="button" class="button-open profile__add-place" aria-label="Добавить место"></button>
             </section>
             <section class="elements page__content">
                 <ul class="elements__list">
@@ -46,7 +46,7 @@
         <span class="edit-form__input-error" id="profile-name-error"></span>
         <input type="text" class="edit-form__field-text" name="profile-job" placeholder="О себе" minlength="2" maxlength="200" required>
         <span class="edit-form__input-error" id="profile-job-error"></span>
-        <button type="button" class="edit-form__button-close" aria-label="Закрыть форму"></button>
+        <button type="button" class="button-close edit-form__button-close" aria-label="Закрыть форму"></button>
         <button type="submit" class="edit-form__button-save">Сохранить</button>
       </form>
     </div>
@@ -59,7 +59,7 @@
         <span class="edit-form__input-error" id="place-name-error"></span>
         <input type="url" class="edit-form__field-text" name="place-reference" placeholder="Ссылка на картинку" required>
         <span class="edit-form__input-error" id="place-reference-error"></span>
-        <button type="button" class="edit-form__button-close" aria-label="Закрыть форму"></button>
+        <button type="button" class="button-close edit-form__button-close" aria-label="Закрыть форму"></button>
         <button type="submit" class="edit-form__button-save">Создать</button>
       </form>
     </div>
@@ -67,7 +67,7 @@
         <div class="popup__background">
         </div>
         <figcaption class="popup__figure">
-          <button type="button" class="edit-form__button-close" aria-label="Закрыть форму"></button>
+          <button type="button" class="button-close" aria-label="Закрыть форму"></button>
           <img src="" alt="" class="popup__image">
           <figcaption class="popup__caption"></figcaption>
         </figcaption>
@@ -83,7 +83,7 @@
       </li>
     </template>
     <script src="./script/index.js"></script>
-    <script src="./script/valid.js"></script>
+    <script src="./script/validate.js"></script>
 </body>
 
 </html>

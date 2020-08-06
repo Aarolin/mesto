@@ -18,7 +18,10 @@ const profileFormEdit = profilePopup.querySelector('.edit-form');
 const placeFormEdit = placePopup.querySelector('.edit-form');
 
 //Кнопки, закрывающие формы
-const closeButtons = page.querySelectorAll('.edit-form__button-close');
+const closeButtons = page.querySelectorAll('.button-close');
+
+//Кнопка сохранения формы с местом
+const placeButtonSave = placePopup.querySelector('.edit-form__button-save');
 
 //Элемент figure, в котором лежит изображение
 const figurePopup = imagePopup.querySelector('.popup__figure');
@@ -74,6 +77,14 @@ const usersCards = document.querySelector('.elements__list');
 //Background popup
 const backgroundPopup = imagePopup.querySelector('.popup__background');
 
+//Закрытие на модалок на кнопку Escape
+function addDocumentKeyDownListener(evt) {
+  if (evt.key === 'Escape') {
+    toggleModal(popupOpened(popups));
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
+  }
+}
+
 function createCard(obj) {
   const copyCard = cardTemplate.cloneNode(true);
   const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
@@ -93,6 +104,7 @@ function createCard(obj) {
     figureCaption.textContent = obj.name;
     backgroundPopup.classList.add('popup__background_painted');
     imagePopup.classList.toggle('popup_visible');
+    document.addEventListener('keydown', addDocumentKeyDownListener);
   })
   copyCard.querySelector('.elements__header').textContent = obj.name;
   cardImage.src = obj.link;
@@ -122,48 +134,44 @@ function formSubmitHandler(event) {
   profileName.textContent = inputName.value;
   profileAboutSelf.textContent = inputJob.value;
   toggleModal(profilePopup);
+  document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
 function addPlaceSubmitHandler(event) {
   event.preventDefault();
   addCard(createCard({ name: placeName.value, link: placeReference.value }));
   toggleModal(placePopup);
+  placeName.value = '';
+  placeReference.value = '';
+  toggleButtonState([placeName, placeReference], placeButtonSave);
+  document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
 function popupOpened(popupsList) {
-  return popupsList.some((popup) => {
-    return popup.classList.contains('popup_visible');
-  });
-}
-
-function switchPopup(popupsList) {
+  let openedPopup;
   popupsList.forEach((popup) => {
     if (popup.classList.contains('popup_visible')) {
-      toggleModal(popup);
+      openedPopup = popup;
     }
   });
+  return openedPopup;
 }
 
 profileEdit.addEventListener('click', () => {
   checkProfileForm();
   toggleModal(profilePopup);
+  document.addEventListener('keydown', addDocumentKeyDownListener);
 });
 
 addPlace.addEventListener('click', () => {
   toggleModal(placePopup);
+  document.addEventListener('keydown', addDocumentKeyDownListener);
 });
 
 
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
-document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    if (popupOpened(popups)) {
-      switchPopup(popups);
-    }
-  }
-});
 
 initialCards.forEach((obj) => {
   addCard(createCard(obj));
@@ -173,11 +181,14 @@ initialCards.forEach((obj) => {
 popupBackground.forEach((item) => {
   item.addEventListener('click', (evt) => {
     evt.target.closest('.popup').classList.remove('popup_visible');
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
   });
 });
 
+//Закрытие на кнопку закрыть
 closeButtons.forEach((button) => {
   button.addEventListener('click', (evt) => {
-    toggleModal(evt.target.closest('.popup'));
+    evt.target.closest('.popup').classList.remove('popup_visible');
+    document.removeEventListener('keydown', addDocumentKeyDownListener);
   });
 });
