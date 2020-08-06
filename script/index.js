@@ -5,12 +5,7 @@ const page = document.querySelector('.page');
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
 const imagePopup = page.querySelector('.image-popup');
-<<<<<<< HEAD
-
-//Бекграунд для использования overlay закрытия
-=======
 const popups = Array.from(page.querySelectorAll('.popup'));
->>>>>>> 489e92f8be7994df7660394e405618cc2bc705da
 const popupBackground = page.querySelectorAll('.popup__background');
 
 
@@ -135,18 +130,6 @@ function addPlaceSubmitHandler(event) {
   toggleModal(placePopup);
 }
 
-<<<<<<< HEAD
-function formCloseHandler(popup) {
-  toggleModal(popup);
-}
-
-document.addEventListener('keydown', (evt) => {
-  if(evt.key === 'Escape') {
-    const activePopup = page.querySelector('.popup_visible');
-    formCloseHandler(activePopup);
-  }
-});
-=======
 function popupOpened(popupsList) {
   return popupsList.some((popup) => {
     return popup.classList.contains('popup_visible');
@@ -160,18 +143,11 @@ function switchPopup(popupsList) {
     }
   });
 }
->>>>>>> 489e92f8be7994df7660394e405618cc2bc705da
 
 profileEdit.addEventListener('click', () => {
   checkProfileForm();
   toggleModal(profilePopup);
 });
-<<<<<<< HEAD
-profileButtonClose.addEventListener('click', () => {
-  toggleModal(profilePopup);
-});
-=======
->>>>>>> 489e92f8be7994df7660394e405618cc2bc705da
 
 addPlace.addEventListener('click', () => {
   toggleModal(placePopup);
@@ -181,19 +157,12 @@ addPlace.addEventListener('click', () => {
 profileFormEdit.addEventListener('submit', formSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
-<<<<<<< HEAD
-popupBackground.forEach((item) => {
-  item.addEventListener('click', (evt) => {
-    evt.target.closest('.popup').classList.remove('popup_visible');
-  });
-=======
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
     if (popupOpened(popups)) {
       switchPopup(popups);
     }
   }
->>>>>>> 489e92f8be7994df7660394e405618cc2bc705da
 });
 
 initialCards.forEach((obj) => {
@@ -207,11 +176,8 @@ popupBackground.forEach((item) => {
   });
 });
 
-<<<<<<< HEAD
-=======
 closeButtons.forEach((button) => {
   button.addEventListener('click', (evt) => {
     toggleModal(evt.target.closest('.popup'));
   });
 });
->>>>>>> 489e92f8be7994df7660394e405618cc2bc705da
