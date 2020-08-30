@@ -1,10 +1,13 @@
+import Card from './Card.js';
+
+
 //Получаем необходимые DOM элементы
 const page = document.querySelector('.page');
 
 //Модалки
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
-const imagePopup = page.querySelector('.image-popup');
+// const imagePopup = page.querySelector('.image-popup');
 const popups = Array.from(page.querySelectorAll('.popup'));
 const popupBackground = page.querySelectorAll('.popup__background');
 
@@ -24,15 +27,15 @@ const closeButtons = page.querySelectorAll('.button-close');
 const placeButtonSave = placePopup.querySelector('.edit-form__button-save');
 
 //Элемент figure, в котором лежит изображение
-const figurePopup = imagePopup.querySelector('.popup__figure');
+// const figurePopup = imagePopup.querySelector('.popup__figure');
 
 //Инпуты из модалки для профиля
 const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
 const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
 
 //Картинка и подпись из figure
-const imgOfFigure = figurePopup.querySelector('.popup__image');
-const figureCaption = figurePopup.querySelector('.popup__caption');
+// const imgOfFigure = figurePopup.querySelector('.popup__image');
+// const figureCaption = figurePopup.querySelector('.popup__caption');
 
 //Инпуты из модалки для карточек
 const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=place-name]');
@@ -75,7 +78,7 @@ const cardTemplate = document.querySelector('#place-card').content;
 const usersCards = document.querySelector('.elements__list');
 
 //Background popup
-const backgroundPopup = imagePopup.querySelector('.popup__background');
+// const backgroundPopup = imagePopup.querySelector('.popup__background');
 
 //Закрытие на модалок на кнопку Escape
 function addDocumentKeyDownListener(evt) {
@@ -85,32 +88,32 @@ function addDocumentKeyDownListener(evt) {
   }
 }
 
-function createCard(obj) {
-  const copyCard = cardTemplate.cloneNode(true);
-  const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
-  const cardLikeButton = copyCard.querySelector('.elements__like');
-  const cardImage = copyCard.querySelector('.elements__image');
-  cardDeleteButton.addEventListener('click', () => {
-    const deleteItem = cardDeleteButton.closest('.elements__item');
-    deleteItem.remove();
-  });
-  cardLikeButton.addEventListener('click', () => {
-    cardLikeButton.classList.toggle('elements__like_disabled');
-    cardLikeButton.classList.toggle('elements__like_active');
-  });
-  cardImage.addEventListener('click', () => {
-    imgOfFigure.src = obj.link;
-    imgOfFigure.alt = obj.name;
-    figureCaption.textContent = obj.name;
-    backgroundPopup.classList.add('popup__background_painted');
-    imagePopup.classList.toggle('popup_visible');
-    document.addEventListener('keydown', addDocumentKeyDownListener);
-  })
-  copyCard.querySelector('.elements__header').textContent = obj.name;
-  cardImage.src = obj.link;
-  cardImage.alt = obj.name;
-  return copyCard;
-}
+// function createCard(obj) {
+//   const copyCard = cardTemplate.cloneNode(true);
+//   const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
+//   const cardLikeButton = copyCard.querySelector('.elements__like');
+//   const cardImage = copyCard.querySelector('.elements__image');
+//   // cardDeleteButton.addEventListener('click', () => {
+//   //   const deleteItem = cardDeleteButton.closest('.elements__item');
+//   //   deleteItem.remove();
+//   // });
+//   // cardLikeButton.addEventListener('click', () => {
+//   //   cardLikeButton.classList.toggle('elements__like_disabled');
+//   //   cardLikeButton.classList.toggle('elements__like_active');
+//   // });
+//   // cardImage.addEventListener('click', () => {
+//   //   imgOfFigure.src = obj.link;
+//   //   imgOfFigure.alt = obj.name;
+//   //   figureCaption.textContent = obj.name;
+//   //   backgroundPopup.classList.add('popup__background_painted');
+//   //   imagePopup.classList.toggle('popup_visible');
+//   //   document.addEventListener('keydown', addDocumentKeyDownListener);
+//   // });
+//   copyCard.querySelector('.elements__header').textContent = obj.name;
+//   cardImage.src = obj.link;
+//   cardImage.alt = obj.name;
+//   return copyCard;
+// }
 
 function addCard(card) {
   usersCards.prepend(card);
@@ -174,7 +177,7 @@ placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
 
 initialCards.forEach((obj) => {
-  addCard(createCard(obj));
+  addCard((new Card(obj, 'place-card')).createCard());
 });
 
 //Закрытие overlay
