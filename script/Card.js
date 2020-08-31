@@ -7,7 +7,7 @@ class Card {
     }
 
     _getTemplate() {
-        return document.querySelector(`#${this._templateSelector}`);
+        return document.querySelector(`#${this._templateSelector}`).content;
     }
 
     _handleCardImageClick() {
@@ -39,8 +39,7 @@ class Card {
     }
 
     createCard() {
-        const template = this._getTemplate().content;
-        this._element = template.cloneNode(true);
+        this._element = this._getTemplate().cloneNode(true);
         this._setEventListeners();
         this._element.querySelector('.elements__header').textContent = this._data.name;
         this._element.querySelector('.elements__image').src = this._data.link;

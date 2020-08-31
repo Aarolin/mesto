@@ -1,5 +1,5 @@
 import Card from './Card.js';
-
+import FormValidator from './FormValidator.js';
 
 //Получаем необходимые DOM элементы
 const page = document.querySelector('.page');
@@ -142,11 +142,11 @@ function formSubmitHandler(event) {
 
 function addPlaceSubmitHandler(event) {
   event.preventDefault();
-  addCard(createCard({ name: placeName.value, link: placeReference.value }));
+  addCard((new Card({name: placeName.value, link: placeReference.value}, 'place-card')).createCard());
   toggleModal(placePopup);
   placeName.value = '';
   placeReference.value = '';
-  toggleButtonState([placeName, placeReference], placeButtonSave);
+  // toggleButtonState([placeName, placeReference], placeButtonSave);
   document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
@@ -195,3 +195,15 @@ closeButtons.forEach((button) => {
     document.removeEventListener('keydown', addDocumentKeyDownListener);
   });
 });
+
+const validateObject = {
+  inputSelector: '.edit-form__field-text',
+  submitButtonSelector: '.edit-form__button-save',
+  inactiveButtonClass: 'edit-form__button-save_inactive',
+  inputErrorClass: 'edit-form__field-text_type_error',
+  errorClass: 'edit-form__input-error_active'
+}
+const profileValidator = new FormValidator(validateObject, profileFormEdit);
+const placeValidator = new FormValidator(validateObject, placeFormEdit);
+profileValidator.enableValidation();
+placeValidator.enableValidation();
