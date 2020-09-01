@@ -7,7 +7,6 @@ const page = document.querySelector('.page');
 //Модалки
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
-// const imagePopup = page.querySelector('.image-popup');
 const popups = Array.from(page.querySelectorAll('.popup'));
 const popupBackground = page.querySelectorAll('.popup__background');
 
@@ -23,19 +22,9 @@ const placeFormEdit = placePopup.querySelector('.edit-form');
 //Кнопки, закрывающие формы
 const closeButtons = page.querySelectorAll('.button-close');
 
-//Кнопка сохранения формы с местом
-const placeButtonSave = placePopup.querySelector('.edit-form__button-save');
-
-//Элемент figure, в котором лежит изображение
-// const figurePopup = imagePopup.querySelector('.popup__figure');
-
 //Инпуты из модалки для профиля
 const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
 const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
-
-//Картинка и подпись из figure
-// const imgOfFigure = figurePopup.querySelector('.popup__image');
-// const figureCaption = figurePopup.querySelector('.popup__caption');
 
 //Инпуты из модалки для карточек
 const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=place-name]');
@@ -73,12 +62,7 @@ const initialCards = [
   }
 ];
 
-//Шаблон для карточек
-const cardTemplate = document.querySelector('#place-card').content;
 const usersCards = document.querySelector('.elements__list');
-
-//Background popup
-// const backgroundPopup = imagePopup.querySelector('.popup__background');
 
 //Закрытие на модалок на кнопку Escape
 function addDocumentKeyDownListener(evt) {
@@ -87,33 +71,6 @@ function addDocumentKeyDownListener(evt) {
     document.removeEventListener('keydown', addDocumentKeyDownListener);
   }
 }
-
-// function createCard(obj) {
-//   const copyCard = cardTemplate.cloneNode(true);
-//   const cardDeleteButton = copyCard.querySelector('.elements__recycle-bin');
-//   const cardLikeButton = copyCard.querySelector('.elements__like');
-//   const cardImage = copyCard.querySelector('.elements__image');
-//   // cardDeleteButton.addEventListener('click', () => {
-//   //   const deleteItem = cardDeleteButton.closest('.elements__item');
-//   //   deleteItem.remove();
-//   // });
-//   // cardLikeButton.addEventListener('click', () => {
-//   //   cardLikeButton.classList.toggle('elements__like_disabled');
-//   //   cardLikeButton.classList.toggle('elements__like_active');
-//   // });
-//   // cardImage.addEventListener('click', () => {
-//   //   imgOfFigure.src = obj.link;
-//   //   imgOfFigure.alt = obj.name;
-//   //   figureCaption.textContent = obj.name;
-//   //   backgroundPopup.classList.add('popup__background_painted');
-//   //   imagePopup.classList.toggle('popup_visible');
-//   //   document.addEventListener('keydown', addDocumentKeyDownListener);
-//   // });
-//   copyCard.querySelector('.elements__header').textContent = obj.name;
-//   cardImage.src = obj.link;
-//   cardImage.alt = obj.name;
-//   return copyCard;
-// }
 
 function addCard(card) {
   usersCards.prepend(card);
@@ -131,22 +88,16 @@ function toggleModal(modalForm) {
   modalForm.classList.toggle('popup_visible');
 }
 
-function formSubmitHandler(event) {
-  //Отменяем перезагрузку страницы после закрытия и сохранения формы
-  event.preventDefault();
+function ProfileSubmitHandler() {
   profileName.textContent = inputName.value;
   profileAboutSelf.textContent = inputJob.value;
   toggleModal(profilePopup);
   document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
-function addPlaceSubmitHandler(event) {
-  event.preventDefault();
+function addPlaceSubmitHandler() {
   addCard((new Card({name: placeName.value, link: placeReference.value}, 'place-card')).createCard());
   toggleModal(placePopup);
-  placeName.value = '';
-  placeReference.value = '';
-  // toggleButtonState([placeName, placeReference], placeButtonSave);
   document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 
@@ -172,7 +123,7 @@ addPlace.addEventListener('click', () => {
 });
 
 
-profileFormEdit.addEventListener('submit', formSubmitHandler);
+profileFormEdit.addEventListener('submit', ProfileSubmitHandler);
 placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
 
