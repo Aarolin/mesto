@@ -1,4 +1,4 @@
-import ImageModal from './ImageModal.js';
+// import ImageModal from './ImageModal.js';
 
 class Card {
     constructor(data, templateSelector) {
@@ -7,15 +7,15 @@ class Card {
     }
 
     _getTemplate() {
-        return document.querySelector(`#${this._templateSelector}`).content;
+        return document.querySelector(`#${this._templateSelector}`).content.cloneNode(true);
     }
 
-    _handleCardImageClick() {
-        this._element.querySelector('.elements__image').addEventListener('click', () => {
-            const imageModal = new ImageModal(this._data, 'image-popup');
-            imageModal.openModal();
-        });
-    }
+    // _handleCardImageClick() {
+    //     this._element.querySelector('.elements__image').addEventListener('click', () => {
+    //         const imageModal = new ImageModal(this._data, 'image-popup');
+    //         imageModal.openModal();
+    //     });
+    // }
 
     _handleLikeClick() {
         const likeButton = this._element.querySelector('.elements__like');
@@ -33,17 +33,19 @@ class Card {
     }
 
     _setEventListeners() {        
-        this._handleCardImageClick();
+        // this._handleCardImageClick();
         this._handleLikeClick();
         this._handleDeleteCardClick();
     }
 
     createCard() {
-        this._element = this._getTemplate().cloneNode(true);
+        this._element = this._getTemplate();
         this._setEventListeners();
-        this._element.querySelector('.elements__header').textContent = this._data.name;
-        this._element.querySelector('.elements__image').src = this._data.link;
-        this._element.querySelector('.elements__image').alt = this._data.name;
+        const elementImage = this._element.querySelector('.elements__image');
+        const elementHeader = this._element.querySelector('.elements__header'); 
+        elementHeader.textContent = this._data.name;
+        elementImage.src = this._data.link;
+        elementImage.alt = this._data.name;
         return this._element;
     }
 }

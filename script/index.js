@@ -64,14 +64,6 @@ const initialCards = [
 
 const usersCards = document.querySelector('.elements__list');
 
-//Закрытие на модалок на кнопку Escape
-function addDocumentKeyDownListener(evt) {
-  if (evt.key === 'Escape') {
-    toggleModal(popupOpened(popups));
-    document.removeEventListener('keydown', addDocumentKeyDownListener);
-  }
-}
-
 function addCard(card) {
   usersCards.prepend(card);
 }
@@ -98,6 +90,7 @@ function ProfileSubmitHandler() {
 function addPlaceSubmitHandler() {
   addCard((new Card({name: placeName.value, link: placeReference.value}, 'place-card')).createCard());
   toggleModal(placePopup);
+  placeFormEdit.reset();
   document.removeEventListener('keydown', addDocumentKeyDownListener);
 }
 

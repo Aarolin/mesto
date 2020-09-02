@@ -57,14 +57,6 @@ class FormValidator {
         }
     }
 
-    //Очистка полей ввода внутри формы
-    _resetInputs() {
-        this._inputList.forEach((inputElement) => {
-            this._toggleButtonState();
-            inputElement.value = '';
-        });
-    }
-
     //Очистка ошибок валидации
     _resetInputsError() {
         const inputErrorList = Array.from(this._formElement.querySelectorAll('.edit-form__input-error'));
@@ -75,16 +67,6 @@ class FormValidator {
 
     //Установка необходимых слушателей
     _setEventListeners() {
-        this._formElement.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            //Форма для карточек требует очистки полей после создания новой карточки
-            if (this._formElement.name === 'place-edit-form') {
-                this._resetInputs();
-                this._inputList.forEach((inputElement) => {
-                    inputElement.textContent = '';
-                });
-            }
-        });
         //Очистка ошибок валидации, если при закрытии формы для карточек, новая карточка не была добавлена
         if (this._formElement.name === 'place-edit-form') {
             this._buttonClose.addEventListener('click', () => {
@@ -105,12 +87,11 @@ class FormValidator {
     }
 
     enableValidation() {
-        //При открытии формы добавления карточек кнопка "Создать" не должна быть активна
-        if (this._formElement.name === 'place-edit-form') {
-            this._toggleButtonState();
-        }
-
         this._setEventListeners();
+        this._formElement.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this._toggleButtonState();
+        });
     }
 }
 
