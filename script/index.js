@@ -1,15 +1,15 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import {addDocumentKeyDownListener, handleOpenCardImageEventListener, toggleModal} from './utils.js';
 
 //Получаем необходимые DOM элементы
 const page = document.querySelector('.page');
 
+const popups = Array.from(document.querySelectorAll('.popup'));
+
 //Модалки
 const profilePopup = page.querySelector('.profile-popup');
 const placePopup = page.querySelector('.place-popup');
-const popups = Array.from(page.querySelectorAll('.popup'));
-const popupBackground = page.querySelectorAll('.popup__background');
-
 
 //Кнопки редактирования
 const profileEdit = page.querySelector('.profile__edit');
@@ -18,9 +18,6 @@ const addPlace = page.querySelector('.profile__add-place');
 //Формы
 const profileFormEdit = profilePopup.querySelector('.edit-form');
 const placeFormEdit = placePopup.querySelector('.edit-form');
-
-//Кнопки, закрывающие формы
-const closeButtons = page.querySelectorAll('.button-close');
 
 //Инпуты из модалки для профиля
 const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
@@ -62,57 +59,58 @@ const initialCards = [
   }
 ];
 
+//Место куда вставляются карточки 
 const usersCards = document.querySelector('.elements__list');
+
+//Объект с данными валидации
+const validateObject = {
+  inputSelector: '.edit-form__field-text',
+  submitButtonSelector: '.edit-form__button-save',
+  inactiveButtonClass: 'edit-form__button-save_inactive',
+  inputErrorClass: 'edit-form__field-text_type_error',
+  errorClass: 'edit-form__input-error_active'
+}
+
+//Объект для валидации формы с профилем
+const profileValidator = new FormValidator(validateObject, profileFormEdit);
+
+//Объект для валидации формы с добавлением карточки
+const placeValidator = new FormValidator(validateObject, placeFormEdit);
 
 function addCard(card) {
   usersCards.prepend(card);
-}
-
-function checkProfileForm() {
-  if (!profilePopup.classList.contains('popup_visible')) {
-    inputName.setAttribute('value', profileName.textContent);
-    inputJob.setAttribute('value', profileAboutSelf.textContent);
-  }
-}
-
-//Функция обработчик открытия модального окна
-function toggleModal(modalForm) {
-  modalForm.classList.toggle('popup_visible');
 }
 
 function ProfileSubmitHandler() {
   profileName.textContent = inputName.value;
   profileAboutSelf.textContent = inputJob.value;
   toggleModal(profilePopup);
-  document.removeEventListener('keydown', addDocumentKeyDownListener);
+  document.removeEventListener('keyup', addDocumentKeyDownListener);
 }
 
 function addPlaceSubmitHandler() {
   addCard((new Card({name: placeName.value, link: placeReference.value}, 'place-card')).createCard());
   toggleModal(placePopup);
   placeFormEdit.reset();
-  document.removeEventListener('keydown', addDocumentKeyDownListener);
+  document.removeEventListener('keyup', addDocumentKeyDownListener);
 }
 
-function popupOpened(popupsList) {
-  let openedPopup;
-  popupsList.forEach((popup) => {
-    if (popup.classList.contains('popup_visible')) {
-      openedPopup = popup;
-    }
-  });
-  return openedPopup;
+function closeModalWindow(modalWindow) {
+  modalWindow.classList.remove('popup_visible');
 }
 
 profileEdit.addEventListener('click', () => {
-  checkProfileForm();
+  if (!profilePopup.classList.contains('popup_visible')) {
+    inputName.setAttribute('value', profileName.textContent);
+    inputJob.setAttribute('value', profileAboutSelf.textContent);
+  }
   toggleModal(profilePopup);
-  document.addEventListener('keydown', addDocumentKeyDownListener);
+  document.addEventListener('keyup', addDocumentKeyDownListener);
 });
 
 addPlace.addEventListener('click', () => {
   toggleModal(placePopup);
-  document.addEventListener('keydown', addDocumentKeyDownListener);
+  document.addEventListener('keyup', addDocumentKeyDownListener);
 });
 
 
@@ -121,33 +119,19 @@ placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
 
 initialCards.forEach((obj) => {
-  addCard((new Card(obj, 'place-card')).createCard());
+  const card = (new Card(obj, 'place-card')).createCard(); 
+  handleOpenCardImageEventListener(card);
+  addCard(card);
 });
 
-//Закрытие overlay
-popupBackground.forEach((item) => {
-  item.addEventListener('click', (evt) => {
-    evt.target.closest('.popup').classList.remove('popup_visible');
-    document.removeEventListener('keydown', addDocumentKeyDownListener);
-  });
-});
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('popup__background') || evt.target.classList.contains('button-close')) {
+      closeModalWindow(popup);
+      document.removeEventListener('keyup', addDocumentKeyDownListener);
+    }
+  })
+})
 
-//Закрытие на кнопку закрыть
-closeButtons.forEach((button) => {
-  button.addEventListener('click', (evt) => {
-    evt.target.closest('.popup').classList.remove('popup_visible');
-    document.removeEventListener('keydown', addDocumentKeyDownListener);
-  });
-});
-
-const validateObject = {
-  inputSelector: '.edit-form__field-text',
-  submitButtonSelector: '.edit-form__button-save',
-  inactiveButtonClass: 'edit-form__button-save_inactive',
-  inputErrorClass: 'edit-form__field-text_type_error',
-  errorClass: 'edit-form__input-error_active'
-}
-const profileValidator = new FormValidator(validateObject, profileFormEdit);
-const placeValidator = new FormValidator(validateObject, placeFormEdit);
 profileValidator.enableValidation();
 placeValidator.enableValidation();

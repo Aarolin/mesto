@@ -1,5 +1,3 @@
-// import ImageModal from './ImageModal.js';
-
 class Card {
     constructor(data, templateSelector) {
         this._data = data;
@@ -9,13 +7,6 @@ class Card {
     _getTemplate() {
         return document.querySelector(`#${this._templateSelector}`).content.cloneNode(true);
     }
-
-    // _handleCardImageClick() {
-    //     this._element.querySelector('.elements__image').addEventListener('click', () => {
-    //         const imageModal = new ImageModal(this._data, 'image-popup');
-    //         imageModal.openModal();
-    //     });
-    // }
 
     _handleLikeClick() {
         const likeButton = this._element.querySelector('.elements__like');
@@ -33,7 +24,6 @@ class Card {
     }
 
     _setEventListeners() {        
-        // this._handleCardImageClick();
         this._handleLikeClick();
         this._handleDeleteCardClick();
     }

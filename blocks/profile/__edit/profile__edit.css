@@ -9,6 +9,7 @@
     margin-top: 19px;
     margin-left: 17px;
     transition: opacity 0.2s linear;
+    outline: none;
 }
 .profile__edit:hover {
     opacity: 0.6;
