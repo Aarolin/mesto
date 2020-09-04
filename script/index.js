@@ -1,6 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import {addDocumentKeyDownListener, handleOpenCardImageEventListener, toggleModal} from './utils.js';
+import {addDocumentKeyDownListener, toggleModal} from './utils.js';
 
 //Получаем необходимые DOM элементы
 const page = document.querySelector('.page');
@@ -120,7 +120,6 @@ placeFormEdit.addEventListener('submit', addPlaceSubmitHandler);
 
 initialCards.forEach((obj) => {
   const card = (new Card(obj, 'place-card')).createCard(); 
-  handleOpenCardImageEventListener(card);
   addCard(card);
 });
 

@@ -1,3 +1,5 @@
+import {handleOpenCardImageEventListener} from './utils.js';
+
 class Card {
     constructor(data, templateSelector) {
         this._data = data;
@@ -24,6 +26,7 @@ class Card {
     }
 
     _setEventListeners() {        
+        handleOpenCardImageEventListener(this._element);
         this._handleLikeClick();
         this._handleDeleteCardClick();
     }
