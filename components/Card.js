@@ -1,4 +1,4 @@
-import {handleOpenCardImageEventListener} from './utils.js';
+import {handleOpenCardImageEventListener} from '../utils/utils.js';
 
 class Card {
     constructor(data, templateSelector) {
