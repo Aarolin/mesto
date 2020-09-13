@@ -1,13 +1,17 @@
-import {handleOpenCardImageEventListener} from '../utils/utils.js';
+// import {handleOpenCardImageEventListener} from '../utils/utils.js';
 
 class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, handleCardClick) {
         this._data = data;
         this._templateSelector = templateSelector;
+        this._handleCardClick = handleCardClick;
+        this._element = this._getTemplate();
+        this._image = this._element.querySelector('.elements__image');
+        this._header = this._element.querySelector('.elements__header');
     }
 
     _getTemplate() {
-        return document.querySelector(`#${this._templateSelector}`).content.cloneNode(true);
+        return document.querySelector(this._templateSelector).content.cloneNode(true);
     }
 
     _handleLikeClick() {
@@ -26,19 +30,18 @@ class Card {
     }
 
     _setEventListeners() {        
-        handleOpenCardImageEventListener(this._element);
+        this._image.addEventListener('click', () => {
+            this._handleCardClick(this._image.src, this._header.textContent);
+        }); 
         this._handleLikeClick();
         this._handleDeleteCardClick();
     }
 
     createCard() {
-        this._element = this._getTemplate();
-        this._setEventListeners();
-        const elementImage = this._element.querySelector('.elements__image');
-        const elementHeader = this._element.querySelector('.elements__header'); 
-        elementHeader.textContent = this._data.name;
-        elementImage.src = this._data.link;
-        elementImage.alt = this._data.name;
+        this._setEventListeners(); 
+        this._header.textContent = this._data.name;
+        this._image.src = this._data.link;
+        this._image.alt = this._data.name;
         return this._element;
     }
 }
