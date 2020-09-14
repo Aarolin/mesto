@@ -1,10 +1,12 @@
-import Card from '../components/Card.js';
-import FormValidator from '../components/FormValidator.js';;
+import './index.css';
+import '../index.html';
 import { profileFormEdit, placeFormEdit, popupWithImage } from '../utils/constants.js';
 import { profileName, profileAboutSelf } from '../utils/constants.js';
 import { initialCards } from '../utils/constants.js';
 import { profileEdit, addPlace } from '../utils/constants.js';
 import { validateObject } from '../utils/constants.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';;
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
