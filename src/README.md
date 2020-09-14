@@ -11,5 +11,5 @@
 * CSS
 * JavaScript
 
-[Ссылка на проект](https://aarolin.github.io/mesto/)
+[Ссылка на проект](https://aarolin.github.io/mesto/src)
 
