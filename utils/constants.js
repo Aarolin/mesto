@@ -15,12 +15,12 @@ export const profileFormEdit = profilePopup.querySelector('.edit-form');
 export const placeFormEdit = placePopup.querySelector('.edit-form');
 
 //Инпуты из модалки для профиля
-export const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=profile-name]');
-export const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=profile-job]');
+export const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=name]');
+export const inputJob = profileFormEdit.querySelector('.edit-form__field-text[name=status]');
 
 //Инпуты из модалки для карточек
-export const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=place-name]');
-export const placeReference = placeFormEdit.querySelector('.edit-form__field-text[name=place-reference]');
+export const placeName = placeFormEdit.querySelector('.edit-form__field-text[name=name]');
+export const placeReference = placeFormEdit.querySelector('.edit-form__field-text[name=link]');
 
 //Поля из профиля
 export const profileName = page.querySelector('.profile__name');

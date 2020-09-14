@@ -41,10 +41,10 @@
         </div>
       <form action="#" class="edit-form" name="profile-edit-form">
         <h2 class="edit-form__header">Редактировать профиль</h2>
-        <input type="text" class="edit-form__field-text" name="profile-name" placeholder="Введите имя" minlength="2" maxlength="40" required>
-        <span class="edit-form__input-error" id="profile-name-error"></span>
-        <input type="text" class="edit-form__field-text" name="profile-job" placeholder="О себе" minlength="2" maxlength="200" required>
-        <span class="edit-form__input-error" id="profile-job-error"></span>
+        <input type="text" class="edit-form__field-text" name="name" placeholder="Введите имя" minlength="2" maxlength="40" required>
+        <span class="edit-form__input-error" id="name-error"></span>
+        <input type="text" class="edit-form__field-text" name="status" placeholder="О себе" minlength="2" maxlength="200" required>
+        <span class="edit-form__input-error" id="status-error"></span>
         <button type="button" class="button-close edit-form__button-close" aria-label="Закрыть форму"></button>
         <button type="submit" class="edit-form__button-save">Сохранить</button>
       </form>
@@ -54,10 +54,10 @@
       </div>
       <form action="#" class="edit-form" name="place-edit-form">
         <h2 class="edit-form__header">Новое место</h2>
-        <input type="text" class="edit-form__field-text" name="place-name" placeholder="Название" minlength="1" maxlength="30" required>
-        <span class="edit-form__input-error" id="place-name-error"></span>
-        <input type="url" class="edit-form__field-text" name="place-reference" placeholder="Ссылка на картинку" required>
-        <span class="edit-form__input-error" id="place-reference-error"></span>
+        <input type="text" class="edit-form__field-text" name="name" placeholder="Название" minlength="1" maxlength="30" required>
+        <span class="edit-form__input-error" id="name-error"></span>
+        <input type="url" class="edit-form__field-text" name="link" placeholder="Ссылка на картинку" required>
+        <span class="edit-form__input-error" id="link-error"></span>
         <button type="button" class="button-close edit-form__button-close" aria-label="Закрыть форму"></button>
         <button type="submit" class="edit-form__button-save edit-form__button-save_inactive">Создать</button>
       </form>

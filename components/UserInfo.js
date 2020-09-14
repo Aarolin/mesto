@@ -5,11 +5,11 @@ export default class UserInfo {
     }
     
     getUserInfo() {
-        return {userName: this._userNameElement.textContent, userSelfInfo: this._userSelfInfoElement.textContent};
+        return {name: this._userNameElement.textContent, status: this._userSelfInfoElement.textContent};
     }
 
     setUserInfo(userName, userSelfInfo) {
-        this._userNameElement.value = userName;
-        this._userSelfInfoElement.value = userSelfInfo;
+        this._userNameElement.textContent = userName;
+        this._userSelfInfoElement.textContent = userSelfInfo;
     }
 }
