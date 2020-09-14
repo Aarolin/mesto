@@ -5,7 +5,6 @@ export default class Popup {
     }
     open() {
         this._element.classList.add('popup_visible');
-        this.setEventListeners();
     }
     close() {
         this._element.classList.remove('popup_visible');

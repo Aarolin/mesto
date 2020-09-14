@@ -1,6 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';;
-import { profileFormEdit, placeFormEdit } from '../utils/constants.js';
+import { profileFormEdit, placeFormEdit, popupWithImage } from '../utils/constants.js';
 import { profileName, profileAboutSelf } from '../utils/constants.js';
 import { initialCards } from '../utils/constants.js';
 import { profileEdit, addPlace } from '../utils/constants.js';
@@ -17,6 +17,7 @@ const profileValidator = new FormValidator(validateObject, profileFormEdit);
 const placeValidator = new FormValidator(validateObject, placeFormEdit);
 
 const popupWithImageElement = new PopupWithImage('.image-popup');
+popupWithImageElement.setEventListeners();
 
 const userInfoElement = new UserInfo({ userNameElement: profileName, userSelfInfoElement: profileAboutSelf });
 
@@ -25,6 +26,8 @@ const popupWithProfileElement = new PopupWithForm('.profile-popup', (userData) =
   popupWithProfileElement.close();
 });
 
+popupWithProfileElement.setEventListeners();
+
 const popupWithPlaceElement = new PopupWithForm('.place-popup', (dataPlace) => {
   const newCard = new Card(dataPlace, '#place-card', (cardImageSrc, cardImageCaption) => {
     popupWithImageElement.open(cardImageSrc, cardImageCaption);
@@ -32,6 +35,8 @@ const popupWithPlaceElement = new PopupWithForm('.place-popup', (dataPlace) => {
   cardList.addItem(newCard);
   popupWithPlaceElement.close();
 });
+
+popupWithPlaceElement.setEventListeners();
 
 const cardList = new Section({
   data: initialCards, renderer: (item) => {
