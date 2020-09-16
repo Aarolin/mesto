@@ -32,7 +32,7 @@ const popupWithProfileElement = new PopupWithForm('.profile-popup', (userData) =
 popupWithProfileElement.setEventListeners();
 
 const popupWithPlaceElement = new PopupWithForm('.place-popup', (dataPlace) => {
-  const newCard = createCard(item, '#place-card', (cardImageSrc, cardImageCaption) => {
+  const newCard = createCard(dataPlace, '#place-card', (cardImageSrc, cardImageCaption) => {
     popupWithImageElement.open(cardImageSrc, cardImageCaption);
   });
   cardList.addItem(newCard);
