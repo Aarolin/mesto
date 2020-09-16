@@ -1,6 +1,4 @@
-//Получаем необходимые DOM элементы
-export const page = document.querySelector('.page');
-export const popups = Array.from(document.querySelectorAll('.popup'));
+const page = document.querySelector('.page');
 
 //Модалки
 export const profilePopup = page.querySelector('.profile-popup');
@@ -65,7 +63,3 @@ export const validateObject = {
   inputErrorClass: 'edit-form__field-text_type_error',
   errorClass: 'edit-form__input-error_active'
 }
-
-export const popupWithImage = document.querySelector('.image-popup');
-export const popupCaption = popupWithImage.querySelector('.popup__caption');
-export const popupImage = popupWithImage.querySelector('.popup__image');

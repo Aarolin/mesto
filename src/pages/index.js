@@ -1,16 +1,17 @@
 import './index.css';
 import '../index.html';
-import { profileFormEdit, placeFormEdit, popupWithImage } from '../utils/constants.js';
+import { profileFormEdit, placeFormEdit } from '../utils/constants.js';
 import { profileName, profileAboutSelf } from '../utils/constants.js';
 import { initialCards } from '../utils/constants.js';
 import { profileEdit, addPlace } from '../utils/constants.js';
 import { validateObject } from '../utils/constants.js';
-import Card from '../components/Card.js';
+import { createCard } from '../utils/utils.js';
 import FormValidator from '../components/FormValidator.js';;
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
+
 
 //Объект для валидации формы с профилем
 const profileValidator = new FormValidator(validateObject, profileFormEdit);
@@ -31,9 +32,9 @@ const popupWithProfileElement = new PopupWithForm('.profile-popup', (userData) =
 popupWithProfileElement.setEventListeners();
 
 const popupWithPlaceElement = new PopupWithForm('.place-popup', (dataPlace) => {
-  const newCard = new Card(dataPlace, '#place-card', (cardImageSrc, cardImageCaption) => {
+  const newCard = createCard(item, '#place-card', (cardImageSrc, cardImageCaption) => {
     popupWithImageElement.open(cardImageSrc, cardImageCaption);
-  }).createCard();
+  });
   cardList.addItem(newCard);
   popupWithPlaceElement.close();
 });
@@ -42,9 +43,9 @@ popupWithPlaceElement.setEventListeners();
 
 const cardList = new Section({
   data: initialCards, renderer: (item) => {
-    const cardElement = new Card(item, '#place-card', (cardImageSrc, cardImageCaption) => {
+    const cardElement = createCard(item, '#place-card', (cardImageSrc, cardImageCaption) => {
       popupWithImageElement.open(cardImageSrc, cardImageCaption);
-    }).createCard();
+    });
     cardList.addItem(cardElement);
   }
 }, '.elements__list');
