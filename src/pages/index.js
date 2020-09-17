@@ -5,7 +5,7 @@ import { profileName, profileAboutSelf } from '../utils/constants.js';
 import { initialCards } from '../utils/constants.js';
 import { profileEdit, addPlace } from '../utils/constants.js';
 import { validateObject } from '../utils/constants.js';
-import { createCard } from '../utils/utils.js';
+import { createCard, renderCard } from '../utils/utils.js';
 import FormValidator from '../components/FormValidator.js';;
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -19,7 +19,7 @@ const profileValidator = new FormValidator(validateObject, profileFormEdit);
 //Объект для валидации формы с добавлением карточки
 const placeValidator = new FormValidator(validateObject, placeFormEdit);
 
-const popupWithImageElement = new PopupWithImage('.image-popup');
+export const popupWithImageElement = new PopupWithImage('.image-popup');
 popupWithImageElement.setEventListeners();
 
 const userInfoElement = new UserInfo({ userNameElement: profileName, userSelfInfoElement: profileAboutSelf });
@@ -32,10 +32,8 @@ const popupWithProfileElement = new PopupWithForm('.profile-popup', (userData) =
 popupWithProfileElement.setEventListeners();
 
 const popupWithPlaceElement = new PopupWithForm('.place-popup', (dataPlace) => {
-  const newCard = createCard(dataPlace, '#place-card', (cardImageSrc, cardImageCaption) => {
-    popupWithImageElement.open(cardImageSrc, cardImageCaption);
-  });
-  cardList.addItem(newCard);
+  const newCard = createCard(dataPlace);
+  renderCard(cardList, newCard);
   popupWithPlaceElement.close();
 });
 
@@ -43,10 +41,8 @@ popupWithPlaceElement.setEventListeners();
 
 const cardList = new Section({
   data: initialCards, renderer: (item) => {
-    const cardElement = createCard(item, '#place-card', (cardImageSrc, cardImageCaption) => {
-      popupWithImageElement.open(cardImageSrc, cardImageCaption);
-    });
-    cardList.addItem(cardElement);
+    const cardElement = createCard(item);
+    renderCard(cardList, cardElement);
   }
 }, '.elements__list');
 
