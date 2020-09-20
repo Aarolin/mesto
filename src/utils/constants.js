@@ -3,14 +3,19 @@ const page = document.querySelector('.page');
 //Модалки
 export const profilePopup = page.querySelector('.profile-popup');
 export const placePopup = page.querySelector('.place-popup');
+export const deletePopup = document.querySelector('.place-delete-popup');
+export const updatePopup = document.querySelector('.update-profile-popup');
 
 //Кнопки редактирования
 export const profileEdit = page.querySelector('.profile__edit');
 export const addPlace = page.querySelector('.profile__add-place');
 
+export const profile = document.querySelector('.profile__avatar');
+
 //Формы
 export const profileFormEdit = profilePopup.querySelector('.edit-form');
 export const placeFormEdit = placePopup.querySelector('.edit-form');
+export const updateAvatarForm = updatePopup.querySelector('.edit-form');
 
 //Инпуты из модалки для профиля
 export const inputName = profileFormEdit.querySelector('.edit-form__field-text[name=name]');
@@ -23,34 +28,6 @@ export const placeReference = placeFormEdit.querySelector('.edit-form__field-tex
 //Поля из профиля
 export const profileName = page.querySelector('.profile__name');
 export const profileAboutSelf = page.querySelector('.profile__about-self');
-
-//Начальный массив карточек
-export const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 //Место куда вставляются карточки 
 export const usersCards = document.querySelector('.elements__list');

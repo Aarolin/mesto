@@ -6,6 +6,8 @@ export default class PopupWithForm extends Popup {
         this._submitFormHandler = submitFormHandler;
         this._form = this._element.querySelector('.edit-form');
         this._inputList = Array.from(this._form.querySelectorAll('.edit-form__field-text'));
+        this._buttonSubmit = this._element.querySelector('.edit-form__button-save');
+        this._buttonState = this._buttonSubmit.textContent;
         this._getInputValues = this._getInputValues.bind(this);
     }
 
@@ -37,6 +39,18 @@ export default class PopupWithForm extends Popup {
         super.setEventListeners();
     }
 
+    rendering() {
+        if(this._buttonState === 'Создать') {
+            this._buttonSubmit.textContent = 'Создание...';
+        }
+        else {
+            this._buttonSubmit.textContent = 'Сохранение...';
+        } 
+    }
+
+    stopRendering() {
+        this._buttonSubmit.textContent = this._buttonState;
+    }
     close() {
         super.close();
         this._form.reset();
