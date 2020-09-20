@@ -15,7 +15,7 @@ import Api from '../components/Api.js';
 export const popupWithImageElement = new PopupWithImage('.image-popup');
 popupWithImageElement.setEventListeners();
 
-const startProfile = new Api({
+export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15',
   headers: {
     authorization: '2bee6ecc-56d8-4816-8e34-e662025e826e',
@@ -23,24 +23,12 @@ const startProfile = new Api({
   }
 })
 
-startProfile.getUserInfo()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject('Увы: не удалось получить данные о профиле от сервера(');
-  })
+api.getUserInfo()
   .then((res) => {
     const userInfoElement = new UserInfo({ userNameElement: profileName, userSelfInfoElement: profileAboutSelf, userAvatar: profile }, () => {
       const updateProfileAvatar = new PopupWithForm('.update-profile-popup', (link) => {
         updateProfileAvatar.rendering();
-        startProfile.updateAvatar(link.avatar).then((res) => {
-          if(res.ok) {
-            return res.json();
-          }
-          return Promise.reject('Не удалось обновить аватар');
-        })
-        .then((res) => {
+        api.updateAvatar(link.avatar).then((res) => {
           userInfoElement.setUserAvatar(res.avatar);
         })
         .catch((err) => {
@@ -48,8 +36,8 @@ startProfile.getUserInfo()
         })
         .finally(() => {
           updateProfileAvatar.stopRendering();
+          updateProfileAvatar.close();
         })
-        updateProfileAvatar.close();
       });
       updateProfileAvatar.setEventListeners();
       updateProfileAvatar.open();
@@ -59,11 +47,11 @@ startProfile.getUserInfo()
     userInfoElement.setUserInfo(res.name, res.about);
     const popupWithProfileElement = new PopupWithForm('.profile-popup', (userData) => {
       popupWithProfileElement.rendering();
-      startProfile.redactProfile(userData.name, userData.status).finally(() => {
+      api.redactProfile(userData.name, userData.status).finally(() => {
         popupWithProfileElement.stopRendering();
+        userInfoElement.setUserInfo(userData.name, userData.status);
+        popupWithProfileElement.close();
       });
-      userInfoElement.setUserInfo(userData.name, userData.status);
-      popupWithProfileElement.close();
     });
     popupWithProfileElement.setEventListeners();
     profileEdit.addEventListener('click', () => {
@@ -75,21 +63,7 @@ startProfile.getUserInfo()
     console.log(err);
   });
 
-
-const startCards = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-15',
-  headers: {
-    authorization: '2bee6ecc-56d8-4816-8e34-e662025e826e',
-    'Content-Type': 'application/json'
-  }
-});
-startCards.getInitialCards().then((res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject('Увы: не удалось получить карточки от сервера(');
-})
-  .then((res) => {
+  api.getInitialCards().then((res) => {
     const cardList = new Section({
       data: res, renderer: (item) => {
         const cardElement = createCard(item);
@@ -99,19 +73,13 @@ startCards.getInitialCards().then((res) => {
     cardList.renderItems();
     const popupWithPlaceElement = new PopupWithForm('.place-popup', (dataPlace) => {
       popupWithPlaceElement.rendering();
-      startCards.addCard(dataPlace.name, dataPlace.link).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject('Не удалось добавить новую карточку(');
-      }).then((res) => {
-        console.log(res);
+      api.addCard(dataPlace.name, dataPlace.link).then((res) => {
         const newCard = createCard(res);
         renderCard(cardList, newCard);
-        popupWithPlaceElement.close();
       }).catch((err) => {
         console.log(err);
       }).finally(() => {
+        popupWithPlaceElement.close();
         popupWithPlaceElement.stopRendering();
       });
     });

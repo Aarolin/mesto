@@ -7,12 +7,22 @@ export default class Api {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'GET',
             headers: this._headers
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject('Увы: не удалось получить карточки от сервера(');
         });
     }
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
             headers: this._headers
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject('Увы: не удалось получить данные о профиле от сервера(');
         });
     }
     redactProfile(newName, newStatus) {
@@ -23,6 +33,11 @@ export default class Api {
                 name: newName,
                 about: newStatus
             })
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject();
         });
     }
     addCard(name, link) {
@@ -33,12 +48,22 @@ export default class Api {
                 name: name,
                 link: link
             })
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject('Не удалось добавить новую карточку(');
         });
     }
     deleteCard(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`, {
             method: 'DELETE', 
             headers: this._headers
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject();
         });
     }
 
@@ -46,6 +71,11 @@ export default class Api {
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'PUT',
             headers: this._headers
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject('Не удалось поставить лайк');
         });
     }
 
@@ -53,6 +83,11 @@ export default class Api {
         return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
             method: 'DELETE',
             headers: this._headers
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject('Не удалось удалить лайк');
         });
     }
 
@@ -63,6 +98,11 @@ export default class Api {
             body: JSON.stringify({
                 avatar: link,
             })
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            }
+            return Promise.reject('Не удалось обновить аватар');
         });
     }
 }
