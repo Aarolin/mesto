@@ -43,7 +43,7 @@
 .elements__like_disabled{background-image:url(./images/elements-like.svg)}
 .elements__like_active{background-image:url(./images/elements-dark-like.svg)}
 .elements__like{background-repeat:no-repeat;background-color:transparent;width:22px;min-height:18px;align-self:center;transition:opacity .2s,transform .2s linear;border:0;outline:none}.elements__like:hover{opacity:.5;cursor:pointer;transform:scale(1.2)}
-
+.elements__like-container{display:flex;flex-direction:column;justify-content:center;align-items:center}
 .elements__like-counter{font-size:13px;line-height:16px;margin:3px 0 0;font-family:Inter,Arial,sans-serif;font-weight:400;text-align:center}
 .elements{margin-bottom:66px}@media screen and (max-width:600px){.elements{margin-bottom:48px}}
 .footer__copyright{margin:0;font-family:Inter,Arial,sans-serif;font-style:normal;font-weight:400;font-size:18px;line-height:22px;color:#545454}@media screen and (max-width:425px){.footer__copyright{font-size:14px;line-height:17px}}
